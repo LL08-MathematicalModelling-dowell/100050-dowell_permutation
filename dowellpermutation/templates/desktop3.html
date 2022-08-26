@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: rgba(0, 0, 0, 0.829);;
+        }
+    </style>
+</head>
+<body>
+    {% csrf_token %}
+    <div class="jumbotron" style="text-align: center; background-color: black; margin-top: 50px; margin-left: 30%; margin-right: 30%;">
+        <h1 class="display-3" style="color: white;">Result</h1>
+        {%for i in li%}
+        <p class="lead" style="color: white;">{{i}}</p>
+        {%endfor%}
+      </div>
+      
+    <!-- <section class="text-gray-600 body-font " style="margin-top:10%; margin-left: 10%;" >
+        <div class="flex justify-center">
+            <div class="mb-3 xl:w-96"> -->
+               <!-- <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full
+                text-slate-600 bg-slate-200 uppercase last:mr-0 mr-1" style="
+                color: white;background-color: black; height: 6%; width: 50%; text-align: center;  padding-top: 2%;font-family:Arial, Helvetica, sans-serif;">
+          Restrictions</span> -->
+          
+          <!-- <div class="input-group input-group-lg" style="margin-top: 8%;">
+           
+            <input type="text" class="form-control" aria-label="Large input group" aria-describedby="input-group-lg" style="height: 500px; width: 150px; background-color: black; margin-left: 5%;"> -->
+            <!-- <table style="margin-left: 10%;" >
+              <tr>
+                <th><button id="dropdownTopButton" data-dropdown-toggle="dropdownTop" data-dropdown-placement="top" class="mr-3 mb-3 md:mb-0 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" style="color: black; background-color: white; "><?xml version="1.0" ?><svg height="7px" version="1.1" viewBox="0 0 10 7" width="10px" xmlns="http://www.w3.org/2000/svg" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns:xlink="http://www.w3.org/1999/xlink"><title/><desc/><defs/><g fill="none" fill-rule="evenodd" id="Page-1" stroke="none" stroke-width="1"><g fill="#000000" id="Core" transform="translate(-469.000000, -9.000000)"><g id="arrow-drop-down" transform="translate(469.000000, 9.500000)"><path d="M0,0 L5,5 L10,0 L0,0 Z" id="Shape"/></g></g></g></svg></button>
+                </th>
+                <th><button id="dropdownBottomButton" data-dropdown-toggle="dropdownBottom" data-dropdown-placement="bottom" class="mr-3 mb-3 md:mb-0 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" style="color: black; background-color: white;"><?xml version="1.0" ?><svg height="7px" version="1.1" viewBox="0 0 10 7" width="10px" xmlns="http://www.w3.org/2000/svg" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns:xlink="http://www.w3.org/1999/xlink"><title/><desc/><defs/><g fill="none" fill-rule="evenodd" id="Page-1" stroke="none" stroke-width="1"><g fill="#000000" id="Core" transform="translate(-553.000000, -9.000000)"><g id="arrow-drop-up" transform="translate(553.000000, 9.500000)"><path d="M0,5 L5,0 L10,5 L0,5 Z" id="Shape"/></g></g></g></svg></button>
+                </th>
+              </tr>
+            </table>
+            <br> -->
+            <!-- <table style="margin-right: 40%;">
+              <tr>
+                <th><span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full
+                  text-slate-600 bg-slate-200 uppercase last:mr-0 mr-1" style="
+                  color: white;background-color: black; height: 6%; width: 100%; text-align: center;  padding-top: 2%;font-family:Arial, Helvetica, sans-serif; width: auto;">
+            Show Combinations</span>
+                </th>
+                <th><span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full
+                  text-slate-600 bg-slate-200 uppercase last:mr-0 mr-1" style="
+                  color: white;background-color: black; height: 6%; width: 100%; text-align: center;  padding-top: 2%;font-family:Arial, Helvetica, sans-serif; width: auto;">
+            Show Permutations</span>
+                </th>
+              </tr>
+            </table> -->
+          <!-- </span>
+          </div>  
+          </div>
+        </div>
+          </section> -->
+</body>
+</html>

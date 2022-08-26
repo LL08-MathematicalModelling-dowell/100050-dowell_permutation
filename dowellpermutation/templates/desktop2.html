@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <title>FE</title>
+    <style>
+        body{
+            background-color: rgba(0, 0, 0, 0.829);
+        }
+        .mid{
+          margin-right: 40%;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="mid" >
+        <form>
+          {% csrf_token %}
+<section class="text-gray-600 body-font" >
+  <div class="container px-5 py-24 mx-auto flex flex-wrap items-center" style="text-align: center; ">
+    <div class="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0" style="background-color: rgba(0, 0, 0, 0.116); text-align: center;">
+      <div class="relative mb-4">
+        <h2 class="font-medium leading-tight text-4xl mt-0 mb-2 text-blue-600" style="color: white ;text-align: center; font-size: 22px;">Calculate Combinations and Permutations</h2>
+        <br>
+        <input type="hidden" value="{{value}}" name="hide">
+        <label for="full-name" class="leading-7 text-sm text-gray-600" style=" color: white; font-size: 15px;">What you want to calculate?</label>
+        <div class="flex justify-center">
+            <div class="mb-3 xl:w-96">
+              <select id="totalVariable" name="select" class="form-select appearance-none
+                block
+                w-full
+                px-3
+                py-1.5
+                text-base
+                font-normal
+                text-gray-700
+                bg-white bg-clip-padding bg-no-repeat
+                border border-solid border-gray-300
+                rounded
+                transition
+                ease-in-out
+                m-0
+                focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example" style="background-color: black;color: white;">
+                  <option value="{{value}}" selected>{{value}}</option>
+              </select>
+            </div>
+          </div>      </div>
+      <div class="relative mb-4">
+        <label for="email" class="leading-7 text-sm text-gray-600" style="color: white ; font-size: 15px;">Total amount in a set (n)</label>
+        <div class="flex justify-center">
+          <div class="mb-4" id="inputDiv">
+            <input name="n" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Enter value of 'n'" style="background-color: black; color: white;" size="30" value="{{n}}" readonly>
+          </div>
+          </div>      </div>
+    
+      <label for="full-name" class="leading-7 text-sm text-gray-600" style="text-align: center; color: white; font-size: 15px;">Total amount in a set (r)</label>
+      <div class="flex justify-center">
+        <div class="mb-4" id="inputDiv">
+          <input name="r" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Enter value of 'r'" style="background-color: black; color: white;" size="30" value="{{r}}" readonly>
+        </div> 
+        </div>
+        <br>
+        <p class="no-underline" style="color: white ; font-size: 15px;">Number of {{value}} = {{perm}}</p>
+        <br>
+        <div>
+          <button formaction="/view" formmethod="post" type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" style="background-color: black; margin-left: 1%;">
+            Show {{value}}
+          </button>
+        </div>
+    <!-- <button formaction="/view" formmethod="post" type="submit" class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" style="background-color: black; color:white; width:auto; margin-left: 12%;">View</button> -->
+    </form>
+    </div>
+  </div>
+</section>
+</div>
+</body>
+</html>
