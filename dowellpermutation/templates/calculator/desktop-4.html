@@ -1,0 +1,211 @@
+{% extends './base/base.html' %}
+{% load static %}
+
+{% block page_content %}
+<br><br><br><br><br><br><br>
+<div class="container">
+    <div class="row p-10">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <div class="card p-5 shadow-lg bg-light p-3">
+                
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <p>Total amount in a set ‘n’ = 4</p>
+                            <p>Amount in each subset ‘r’ = 2</p>
+                            <p>Total number of permutations are = 12</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 shadow p-5">
+                            <h6>Make selection of your choice</h6>
+                            <div class="keyboard">
+                                {% comment %} <div class="keyboard__row keyboard__row--h1">
+                                    <div data-key="27" class="key--word">
+                                    <span>esc</span>
+                                    </div>
+                                    <div data-key="112" class="key--fn">
+                                    <span>F1</span>
+                                    </div>
+                                    <div data-key="113" class="key--fn">
+                                    <span>F2</span>
+                                    </div>
+                                    <div data-key="114" class="key--fn">
+                                    <span>F3</span>
+                                    </div>
+                                    <div data-key="115" class="key--fn">
+                                    <span>F4</span>
+                                    </div>
+                                    <div data-key="116" class="key--fn">
+                                    <span>F5</span>
+                                    </div>
+                                    <div data-key="117" class="key--fn">
+                                    <span>F6</span>
+                                    </div>
+                                    <div data-key="118" class="key--fn">
+                                    <span>F7</span>
+                                    </div>
+                                    <div data-key="119" class="key--fn">
+                                    <span>F8</span>
+                                    </div>
+                                    <div data-key="120" class="key--fn">
+                                    <span>F9</span>
+                                    </div>
+                                    <div data-key="121" class="key--fn">
+                                    <span>F10</span>
+                                    </div>
+                                    <div data-key="122" class="key--fn">
+                                    <span>F11</span>
+                                    </div>
+                                    <div data-key="123" class="key--fn">
+                                    <span>F12</span>
+                                    </div>
+                                    <div data-key="n/a" class="key--word">
+                                    <span>pwr</span>
+                                    </div>
+                                </div> {% endcomment %}
+                                <div class="keyboard__row">
+                                    <div class="key--double" data-key="192">
+                                    <div>~</div>
+                                   
+                                    </div>
+                                    <div class="key--double" data-key="49">
+                                    <div>!</div>
+                                    {% comment %} <div>1</div> {% endcomment %}
+                                    </div>
+                                    <div class="key--double" data-key="50">
+                                    <div>@</div>
+                                    {% comment %} <div>2</div> {% endcomment %}
+                                    </div>
+                                    <div class="key--double" data-key="51">
+                                    <div>#</div>
+                                    {% comment %} <div>3</div> {% endcomment %}
+                                    </div>
+                                    <div class="key--double" data-key="52">
+                                    <div>$</div>
+                                    {% comment %} <div>4</div> {% endcomment %}
+                                    </div>
+                                    <div class="key--double" data-key="53">
+                                    <div>%</div>
+                                    {% comment %} <div>5</div> {% endcomment %}
+                                    </div>
+                                    <div class="key--double" data-key="54">
+                                    <div>^</div>
+                                    {% comment %} <div>6</div> {% endcomment %}
+                                    </div>
+                                    <div class="key--double" data-key="55">
+                                    <div>&</div>
+                                    {% comment %} <div>7</div> {% endcomment %}
+                                    </div>
+                                    <div class="key--double" data-key="56">
+                                    <div>*</div>
+                                    {% comment %} <div>8</div> {% endcomment %}
+                                    </div>
+                                    <div class="key--double" data-key="57">
+                                    <div>(</div>
+                                    {% comment %} <div>9</div> {% endcomment %}
+                                    </div>
+                                    <div class="key--double" data-key="48">
+                                    <div>)</div>
+                                    {% comment %} <div>0</div> {% endcomment %}
+                                    </div>
+                                    
+                                    <div class="key--double" data-key="187">
+                                    <div>+</div>
+                                    {% comment %} <div>=</div> {% endcomment %}
+                                    </div>
+                                    {% comment %} <div class="key--bottom-right key--word key--w4" data-key="8">
+                                    <span>delete</span>
+                                    </div> {% endcomment %}
+                                </div>
+                                <div class="keyboard__row">
+                                    {% comment %} <div class="key--bottom-left key--word key--w4" data-key="9">
+                                    <span>tab</span>
+                                    </div> {% endcomment %}
+                                    <div class="key--letter" data-char="Q">Q</div>
+                                    <div class="key--letter" data-char="W">W</div>
+                                    <div class="key--letter" data-char="E">E</div>
+                                    <div class="key--letter" data-char="R">R</div>
+                                    <div class="key--letter" data-char="T">T</div>
+                                    <div class="key--letter" data-char="Y">Y</div>
+                                    <div class="key--letter" data-char="U">U</div>
+                                    <div class="key--letter" data-char="I">I</div>
+                                    <div class="key--letter" data-char="O">O</div>
+                                    <div class="key--letter" data-char="P">P</div>
+                                    <div class="key--double" data-key="219" data-char="{[">
+                                    <div>(</div>
+                                   
+                                    </div>
+                                    <div class="key--double" data-key="221" data-char="}]">
+                                    <div>)</div>
+                                   
+                                    </div>
+                                   
+                                </div>
+                                <div class="keyboard__row">
+                                    {% comment %} <div class="key--bottom-left key--word key--w5" data-key="20">
+                                    <span>caps lock</span>
+                                    </div> {% endcomment %}
+                                    <div class="key--letter" data-char="A">A</div>
+                                    <div class="key--letter" data-char="S">S</div>
+                                    <div class="key--letter" data-char="D">D</div>
+                                    <div class="key--letter" data-char="F">F</div>
+                                    <div class="key--letter" data-char="G">G</div>
+                                    <div class="key--letter" data-char="H">H</div>
+                                    <div class="key--letter" data-char="J">J</div>
+                                    <div class="key--letter" data-char="K">K</div>
+                                    <div class="key--letter" data-char="L">L</div>
+                                    
+                                   
+                                
+                                </div>
+                                <div class="keyboard__row">
+                                   
+                                    <div class="key--letter" data-char="Z">Z</div>
+                                    <div class="key--letter" data-char="X">X</div>
+                                    <div class="key--letter" data-char="C">C</div>
+                                    <div class="key--letter" data-char="V">V</div>
+                                    <div class="key--letter" data-char="B">B</div>
+                                    <div class="key--letter" data-char="N">N</div>
+                                    <div class="key--letter" data-char="M">M</div>
+                                    <div class="key--double" data-key="188">
+                                    <div>&lt;</div>
+                                    <div>,</div>
+                                    </div>
+                                    <div class="key--double" data-key="190">
+                                    <div>&gt;</div>
+                                    <div>.</div>
+                                    </div>
+                                    
+                                    
+                                </div>
+                                <div class="keyboard__row keyboard__row--h3">
+                                    
+                                    
+                                    
+                                   
+                                   
+                                   
+                                   
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  
+                </div>
+               
+                
+            </div>
+        </div>
+        <div class="col-2"></div>
+
+       
+    </div>
+</div>
+   
+
+{% endblock page_content %}
+
