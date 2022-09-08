@@ -9,7 +9,7 @@ h6 {
 
 .keyboard {
     text-align: center;
-    font-size: 14px;
+    font-size: 11px;
     font-family: sans-serif;
 }
 
@@ -53,8 +53,8 @@ h6 {
 
 .keyboard__row > div[data-pressed],
 .keyboard__row > div:active {
-    background: #f7f2f2;
-    color: #aaa;
+    background: #161515;
+    color: rgb(249, 244, 244);
     position: relative;
     top: 0.2em;
     box-shadow: 0 0 0 0.05em black;
