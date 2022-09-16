@@ -10,6 +10,5 @@ urlpatterns = [
     path('desktop/5', desktop_five_view, name="DesktopFiveView"),
     path('desktop/6', desktop_six_view, name="DesktopSixView"),
     path('desktop/7', desktop_seven_view, name="DesktopSevenView"),
-
-
+    path('permutations/', permutations, name="permutations")
 ]
