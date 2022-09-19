@@ -1,117 +1,27 @@
-from tkinter import N
-from django.http import HttpResponse, HttpResponseBadRequest, JsonResponse
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Apr 18 11:30:23 2022
 
-from django.shortcuts import render, redirect
-
-from django.views import View
-import json
-
-# import pymongo
-import pandas as pd
-from django.core import serializers
+@author: Bradley
+"""
 
 
+def permutations(x1):
+    x1 = None
+    import pymongo
+    import pandas as pd
 
-class IndexView(View):
+    #database connection
+    """
+    myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+    mydb = myclient["mydatabase"]
 
-    def get(self, request):
+    mycol1 = mydb["permutations1"]
+    mycol2 = mydb["permutations_r<n"]
+    mycol3 = mydb["combinations_r<n"]
+    """
 
-        return render(request, 'calculator/index.html')
-
-
-class DesktopTwoView(View):
-
-    def get(self, request):
-        return render(request, 'calculator/desktop-2.html')
-
-class DesktopThreeView(View):
-    def get(self, request):
-        return render(request, 'calculator/desktop-3.html')
-
-class DesktopFourView(View):
-    def get(self, request):
-        return render(request, 'calculator/desktop-4.html')
-
-class DesktopFiveView(View):
-    def get(self, request):
-        return render(request, 'calculator/desktop-5.html')
-
-class DesktopSixView(View):
-    def get(self, request):
-        return render(request, 'calculator/desktop-6.html')
-
-class DesktopSevenView(View):
-    def get(self, request):
-        return render(request, 'calculator/desktop-7.html')
-
-
-# def calculate(request):
-#     def fact(n):
-#         res = 1
-#         for i in range (1, n+1):
-#             res *= i
-#         return res
-
-#     def nPr(n, r):
-#         return fact(n)/fact(n-r)
-
-#         n = int(input("Enter the n value: "))
-#         r = int(input("Enter the r value: "))
-#         print("The nPr value is: ", nPr(n, r))
-
-
-
-
-def permutations(request):
-    method = request.method
-    is_ajax = request.headers.get('X-Requested-with') == 'XMLHttpRequest'
-    if is_ajax:
-        if method == 'POST':
-            data = json.load(request)
-            payload = data.get('payload')
-
-            # initialize result #
-            # result = None
-            # permutation_result = None
-            # permutation_result = serializers.serialize('json', [ result, ])
-
-
-            def fact(n):
-                res = 1
-                for i in range (1, n+1):
-                    res *= i
-                return res
-
-            def nPr(n, r):
-                return fact(n)/fact(n-r)
-
-            # n = int(input("Enter the n value: "))
-            # r = int(input("Enter the r value: "))
-            n = int(payload['n'])
-            r = int(payload['r'])
-
-            print("The nPr value is: ", nPr(n, r))
-
-            # RUN PERMUTATION FUNCTION HERE #
-            data = {
-                'status': 200,
-                'n':n,
-                'r':r,
-                'result': nPr(n, r)
-            }
-            
-            return JsonResponse({'data': data}, status=200)
-            
-        else:
-            return JsonResponse({'response': 'something went wrong'}, status=400)
-    else:
-        return HttpResponseBadRequest('Invalid request')
-
-    # return redirect('DesktopFourView')
-        
-    
-
-def get_permutation(request):
+    #user defined functions
 
     #uniqueness in the list
     def unique(list1):
@@ -123,8 +33,8 @@ def get_permutation(request):
 
     #to take inputs (one by one)
     def inputCharacter():
-        x1 = input("Choose your character to insert: ")
-        # x1 = payload['n']
+        x1 = None
+        x1 = x1
         var=[]
         var.append(x1)
         return var
@@ -162,8 +72,8 @@ def get_permutation(request):
             
             #inserting into mongodb
             doc1={ "variables":d,
-                "AoC":str(choice),
-                "Permutations":perms}
+                   "AoC":str(choice),
+                   "Permutations":perms}
             #mycol1.insert_one(doc1)
 
         else:
@@ -184,8 +94,8 @@ def get_permutation(request):
             
             #inserting permutation to mongodb
             doc1={ "variables":d,
-                "AoC":str(choice),
-                "Permutations":perms1}
+                   "AoC":str(choice),
+                   "Permutations":perms1}
             #mycol1.insert_one(doc1)    
             
         
@@ -226,8 +136,8 @@ def get_permutation(request):
             
             #inserting permutation into mongodb
             doc1={ "variables":d,
-                "AoC":str(choice),
-                "Permutations":perms1}
+                  "AoC":str(choice),
+                  "Permutations":perms1}
             #mycol1.insert_one(doc1)
 
         
@@ -276,16 +186,9 @@ def get_permutation(request):
         print(df2)
         flag=False
 
-   
-
-
-index_view = IndexView.as_view()
-desktop_two_view = DesktopTwoView.as_view()
-desktop_three_view = DesktopThreeView.as_view()
-desktop_four_view = DesktopFourView.as_view()
-desktop_five_view = DesktopFiveView.as_view()
-desktop_six_view = DesktopSixView.as_view()
-desktop_seven_view = DesktopSevenView.as_view()
+    #return()    
+# permutations()
+#permutations(Apple,1,1,TV,2)
 
 
 

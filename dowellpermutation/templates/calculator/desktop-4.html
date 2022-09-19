@@ -11,10 +11,10 @@
                 
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-6">
-                            <p>Total amount in a set ‘n’ = 4</p>
-                            <p>Amount in each subset ‘r’ = 2</p>
-                            <p>Total number of permutations are = 12</p>
+                        <div class="col-12">
+                            <p id="n"></p>
+                            <p id="r"></p>
+                            <p id="perm_result"></p>
                         </div>
                     </div>
                     <div class="row">
@@ -45,6 +45,12 @@
                                     <div class="key--letter" data-char="L">T</div>
 
                                     <!-- Numbers -->
+                                    <div class="key--letter" data-char="H">U</div>
+                                    <div class="key--letter" data-char="H">V</div>
+                                    <div class="key--letter" data-char="J">W</div>
+                                    <div class="key--letter" data-char="K">X</div>
+                                    <div class="key--letter" data-char="L">Y</div>
+                                    <div class="key--letter" data-char="K">Z</div>
                                     <div class="key--letter" data-char="S">0</div>
                                     <div class="key--letter" data-char="D">1</div>
                                     <div class="key--letter" data-char="F">2</div>
@@ -60,9 +66,9 @@
                                     <div class="key--letter" data-char="D">~</div>
                                     <div class="key--letter" data-char="F">!</div>
                                     <div class="key--letter" data-char="G">@</div>
+
                                     <div class="key--letter" data-char="H">#</div>
                                     <div class="key--letter" data-char="L">$</div>
-
                                     <div class="key--letter" data-char="J">%</div>
                                     <div class="key--letter" data-char="K">^</div>
                                     <div class="key--letter" data-char="L">&</div>
@@ -117,6 +123,7 @@
        
     </div>
 </div>
+<script src="{% static 'js/permutation.js' %}"></script>
    
 
 {% endblock page_content %}
