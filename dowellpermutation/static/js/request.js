@@ -1,5 +1,3 @@
-
-
 const n_data = document.getElementById("n_data")
 const r_data = document.getElementById("r_data")
 const perm_form = document.getElementById('perm_form')
@@ -12,7 +10,8 @@ let calculate_permutation = document.getElementById('calculate_permutation')
 let submit_btn = document.getElementById('submit_btn')
 
 
-no_permutation.style.display = "none"
+// no_permutation.style.display = "none"
+
 
 
 
@@ -42,7 +41,8 @@ function getCookie(name) {
 const calculatePerm = (e) => {
     e.preventDefault()
     let result = 0
-    submit_btn.style.display="none"
+
+    
 
     fetch('/calculator/permutations/', {
         method: 'POST',
@@ -62,17 +62,33 @@ const calculatePerm = (e) => {
     })
     .then(response => response.json())
     .then(data => {
+
+        // Show and hide buttons
+        submit_btn.style.display="none"
+        reset_btn.style.display="none"
+        show_permutation.style.display="block"
+
+
         // populate the permutation result here
-        console.log(data.instance['instance'])
-        document.getElementById('permutation_result').innerHTML = data.instance
+
+        localStorage.setItem("result", data.data.result);
+        localStorage.setItem("n", data.data.n);
+        localStorage.setItem("r", data.data.r);
+
+        document.getElementById('permutation_result').innerHTML = `<p>Number of Permutations = <strong>${data.data.result}</strong></p>`
+    
     })
     .catch((error) => {
         // error handling here
-        console.error('Error:', error);
+        // console.error('Error:', error);
     })
 }
 
 perm_form.addEventListener('submit', calculatePerm)
+
+// show_permutation.addEventListener('click', window.location.replace("/calculator/desktop/4"))
+
+
 
 // document.getElementById("perm_form").addEventListener("submit", function(event) {
 //    event.preventDefault() 

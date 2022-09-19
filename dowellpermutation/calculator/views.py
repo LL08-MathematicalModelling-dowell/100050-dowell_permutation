@@ -93,14 +93,21 @@ def permutations(request):
             print("The nPr value is: ", nPr(n, r))
 
             # RUN PERMUTATION FUNCTION HERE #
-
-
-
-            return JsonResponse({'data': nPr(n, r)}, status=200)
+            data = {
+                'status': 200,
+                'n':n,
+                'r':r,
+                'result': nPr(n, r)
+            }
+            
+            return JsonResponse({'data': data}, status=200)
+            
         else:
-            return JsonResponse({'respopnse': nPr(n, r)}, status=400)
+            return JsonResponse({'response': 'something went wrong'}, status=400)
     else:
         return HttpResponseBadRequest('Invalid request')
+
+    # return redirect('DesktopFourView')
         
     
 
@@ -270,9 +277,6 @@ def get_permutation(request):
         flag=False
 
    
-
-# return HttpResponse('works')
-
 
 
 index_view = IndexView.as_view()
