@@ -8,7 +8,7 @@
         <div class="col-2"></div>
         <div class="col-8">
             <div class="card p-5 shadow-lg bg-light p-3">
-                
+                {% comment %} {% csrf_token %} {% endcomment %}
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
@@ -20,6 +20,7 @@
                     <div class="row">
                         {% comment %} <div class="col-12 shadow p-5"> {% endcomment %}
                             <h6>Make selection of your choice</h6>
+                           
                             <div class="keyboard">
                                 
                                 <div class="keyboard__row">
@@ -123,7 +124,10 @@
        
     </div>
 </div>
+{% comment %} <script src="{% static 'js/request.js' %}"></script> {% endcomment %}
+
 <script src="{% static 'js/permutation.js' %}"></script>
+
    
 
 {% endblock page_content %}
