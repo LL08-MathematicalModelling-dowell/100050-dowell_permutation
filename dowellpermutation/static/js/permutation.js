@@ -10,6 +10,13 @@ document.getElementById('n').innerHTML = `Total amount in a set ‘n’ = <stron
 document.getElementById('r').innerHTML = `Amount in each subset ‘r’ = <strong>${r_data}</strong>`;
 
 let keys_data = []
+let keys_row = document.getElementById('keys_row')
+var clicks = 0;
+
+// function onClick() {
+//   clicks += 1;
+//   document.getElementById("clicks").innerHTML = clicks;
+// };
 // let csrf = document.getElementsByName('csrf')
 // console.log(csrf.getAttribute('data-char'))
 
@@ -32,14 +39,27 @@ function getCookie(name) {
     return cookieValue;
 }
 
+const createEl = (char, clicks) => {
+    var card_body = document.getElementById('card_body')
+
+    var el = document.createElement("div");
+    el.classList.add("row");
+    el.classList.add("mt-3");
+
+    el.innerHTML = `<div class="col-12"><hr><p>${clicks}. ${char}</p></div>`;
+    card_body.appendChild(el);
+    console.log(el)
+}
 
 
 let keys = document.querySelectorAll('.key--letter');
 for (var x = 0; x < keys.length; x++) {
     keys[x].onclick = function(){
+    clicks += 1;
 
     // console.log(this.getAttribute('data-char'))
     let char = this.getAttribute('data-char')
+    createEl(char, clicks)
     fetch('/calculator/get-permutation', {
         method: 'POST',
         headers: {

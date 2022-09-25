@@ -215,7 +215,7 @@ def get_permutation(request):
                 if a==1:
                     choice=2
                     flag=True
-                
+                    
                 if a==2 :
                     flag=False
                     z=[]
