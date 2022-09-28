@@ -1,25 +1,3 @@
-
-
-const n_data = localStorage.getItem("n");
-const r_data = localStorage.getItem("r");
-const permutation_data = localStorage.getItem("result");
-
-
-document.getElementById("perm_result").innerHTML = `Total number of permutations are = <strong>${permutation_data}</strong>`;
-document.getElementById('n').innerHTML = `Total amount in a set ‘n’ = <strong>${n_data}</strong>`;
-document.getElementById('r').innerHTML = `Amount in each subset ‘r’ = <strong>${r_data}</strong>`;
-
-let keys_data = []
-let keys_row = document.getElementById('keys_row')
-var clicks = 0;
-
-// function onClick() {
-//   clicks += 1;
-//   document.getElementById("clicks").innerHTML = clicks;
-// };
-// let csrf = document.getElementsByName('csrf')
-// console.log(csrf.getAttribute('data-char'))
-
 // CSRF TOKEN
 function getCookie(name) {
     let cookieValue = null;
@@ -39,6 +17,27 @@ function getCookie(name) {
     return cookieValue;
 }
 
+let keys = document.querySelectorAll('.key--letter');
+
+
+const safeEl = []
+
+const n_data = localStorage.getItem("n");
+const r_data = localStorage.getItem("r");
+const permutation_data = localStorage.getItem("result");
+
+
+document.getElementById("perm_result").innerHTML = `Total number of permutations are = <strong>${permutation_data}</strong>`;
+document.getElementById('n').innerHTML = `Total amount in a set ‘n’ = <strong>${n_data}</strong>`;
+document.getElementById('r').innerHTML = `Amount in each subset ‘r’ = <strong>${r_data}</strong>`;
+
+
+let keys_row = document.getElementById('keys_row')
+var clicks = 0;
+const variables = "A";
+
+local_data = localStorage.setItem("variables", variables);
+
 const createEl = (char, clicks) => {
     var card_body = document.getElementById('card_body')
 
@@ -48,46 +47,42 @@ const createEl = (char, clicks) => {
 
     el.innerHTML = `<div class="col-12"><hr><p>${clicks}. ${char}</p></div>`;
     card_body.appendChild(el);
-    console.log(el)
+
 }
 
 
-let keys = document.querySelectorAll('.key--letter');
 for (var x = 0; x < keys.length; x++) {
     keys[x].onclick = function(){
-    clicks += 1;
+        clicks += 1;
+        
+        let char = this.getAttribute('data-char')
+        createEl(char, clicks)
 
-    // console.log(this.getAttribute('data-char'))
-    let char = this.getAttribute('data-char')
-    createEl(char, clicks)
-    fetch('/calculator/get-permutation', {
-        method: 'POST',
-        headers: {
-            'X-Requested-With': 'XMLHttpRequest',
-            'Content-Type': 'application/json',
-            'X-CSRFToken': getCookie("csrftoken"),
+        localStorage.setItem("variable", char);
+    
 
-        },
-        body: JSON.stringify({
-            payload:{
-                char:char
-            }
+        fetch('/calculator/get-permutation', {
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie("csrftoken"),
+            },
+            body: JSON.stringify({
+                payload:{
+                    char: variables.concat(char),
+
+                }
+            })
         })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.data)
 
-    })
-    .catch((error) => {
 
-    })
+        })
+        .catch((error) => {
 
-   
-  }
+        })
+    }
 };
-  
-
-
-
-// class="" data-char="A"
