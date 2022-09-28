@@ -34,7 +34,7 @@ document.getElementById('r').innerHTML = `Amount in each subset ‘r’ = <stron
 
 let keys_row = document.getElementById('keys_row')
 var clicks = 0;
-const variables = "A";
+const variables = "";
 
 local_data = localStorage.setItem("variables", variables);
 
@@ -60,7 +60,6 @@ for (var x = 0; x < keys.length; x++) {
 
         localStorage.setItem("variable", char);
     
-
         fetch('/calculator/get-permutation', {
             method: 'POST',
             headers: {
@@ -70,7 +69,7 @@ for (var x = 0; x < keys.length; x++) {
             },
             body: JSON.stringify({
                 payload:{
-                    char: variables.concat(char),
+                    char: 'ac',
 
                 }
             })
