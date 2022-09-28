@@ -25,11 +25,20 @@ const safeEl = []
 const n_data = localStorage.getItem("n");
 const r_data = localStorage.getItem("r");
 const permutation_data = localStorage.getItem("result");
+const charstore = document.getElementById('charstore')
+
+// where to append the selected characters
+const selectedChars = new Set();
 
 
 document.getElementById("perm_result").innerHTML = `Total number of permutations are = <strong>${permutation_data}</strong>`;
 document.getElementById('n').innerHTML = `Total amount in a set ‘n’ = <strong>${n_data}</strong>`;
 document.getElementById('r').innerHTML = `Amount in each subset ‘r’ = <strong>${r_data}</strong>`;
+
+// Show the number of elements to be selected
+const msg = `<span>Select ${n_data} variables from the keybord<span>`;
+document.getElementById('select_char').innerHTML = msg;
+
 
 
 let keys_row = document.getElementById('keys_row')
@@ -40,14 +49,42 @@ local_data = localStorage.setItem("variables", variables);
 
 const createEl = (char, clicks) => {
     var card_body = document.getElementById('card_body')
-
     var el = document.createElement("div");
-    el.classList.add("row");
-    el.classList.add("mt-3");
+    el.classList.add("key--letter");
+    selectedChars.add(char)
+    if (selectedChars.size > n_data) {
+        alert(`Not allowed, you can't select more than ${n_data} variables`)
+        main_key.classList.add("disabledbutton")
+        char = none
+    }
 
-    el.innerHTML = `<div class="col-12"><hr><p>${clicks}. ${char}</p></div>`;
-    card_body.appendChild(el);
+    console.log(selectedChars)
+    // el.innerHTML = `<div class="col-12"><hr><p>${clicks}. ${char}</p></div>`;
+    el.innerHTML = `<div data-char="${char}">${char}</div>`
 
+    // card_body.appendChild(el);
+    document.getElementById('char_row').appendChild(el)
+    
+
+}
+const nextChoices = (char) => {
+    ` <div class="row mt-3">
+        <div class="col-12">
+            <p>Now yopu have these choices</p>
+            <ul class="list-group">
+                <ol class="list-group-item d-flex justify-content-between align-items-center">
+                AC
+                <span class="badge badge-primary badge-pill"><i class="bi bi-check"></i></span>
+                </ol>
+                <ol class="list-group-item d-flex justify-content-between align-items-center">
+                    CA
+                    <span class="badge badge-primary badge-pill"><i class="bi bi-check-circle-fill"></i></span>
+                </ol>
+            
+            </ul>
+        </div>
+    
+    </div>`
 }
 
 
@@ -57,6 +94,7 @@ for (var x = 0; x < keys.length; x++) {
         
         let char = this.getAttribute('data-char')
         createEl(char, clicks)
+        
 
         localStorage.setItem("variable", char);
     
@@ -69,7 +107,7 @@ for (var x = 0; x < keys.length; x++) {
             },
             body: JSON.stringify({
                 payload:{
-                    char: 'ac',
+                    char: 'abc',
 
                 }
             })

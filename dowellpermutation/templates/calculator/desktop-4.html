@@ -26,8 +26,9 @@
                     <div class="row" id="card_body">
                         {% comment %} <div class="col-12 shadow p-5"> {% endcomment %}
                             <h6>Make selection of your choice</h6>
+                            <p id="select_char">No of variables</p>
                            
-                            <div class="keyboard">
+                            <div class="keyboard" id="main_key">
                                 
                                 <div class="keyboard__row">
                                     <div class="key--letter" data-char="A">A</div>
@@ -100,11 +101,11 @@
                                    
                                 </div>
                                 <div class="keyboard__row">
-                                    
+                                    <input id="charstore" type="hidden" value="">
                                 </div>
-                                <div class="keyboard__row">
-         
-                                </div>
+
+                                
+                      
                                 <div class="keyboard__row keyboard__row--h3">
                                     
                                     
@@ -116,6 +117,11 @@
                                     
                                     
                                 </div>
+                            </div>
+                            <hr>
+                            <div class="keyboard">
+                                <div class="keyboard__row mt-10" id="char_row">
+                                </div>    
                             </div>
                         {% comment %} </div> {% endcomment %}
                     </div>
