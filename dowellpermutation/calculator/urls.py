@@ -11,5 +11,5 @@ urlpatterns = [
     path('desktop/6', desktop_six_view, name="DesktopSixView"),
     path('desktop/7', desktop_seven_view, name="DesktopSevenView"),
     path('permutations/', permutations, name="permutations"),
-    path('get-permutation', get_permutation, name="get_permutation")
+    path('get-permutation', perm, name="get_permutation")
 ]

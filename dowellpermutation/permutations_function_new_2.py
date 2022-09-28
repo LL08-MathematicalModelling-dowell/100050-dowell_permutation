@@ -8,8 +8,8 @@ Created on Mon Apr 18 11:30:23 2022
 
 def permutations():
 
-    import pymongo
-    import pandas as pd
+    # import pymongo
+    # import pandas as pd
 
     #database connection
     """
