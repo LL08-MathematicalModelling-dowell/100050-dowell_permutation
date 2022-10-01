@@ -8,7 +8,5 @@ def do_permutation(word):
 
     for perm in perms:
         for i in range(len(perm)+1):
-            result.append(perm[:1]+ char + perm[:i])
+            result.append(perm[:i]+ char + perm[i:])
     return result
-
-print(do_permutation("abc"))
