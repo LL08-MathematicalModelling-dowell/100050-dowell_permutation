@@ -8,7 +8,13 @@ const charstore = document.getElementById('charstore')
 
 // where to append the selected characters
 const selectedChars = new Set();
-const variable = Array.from(selectedChars).join(' ');
+const variable = new Set();
+const combination_set = new Set();
+
+// const variable = new Set(['a', 'b', 'c']);
+
+
+
 // CSRF TOKEN
 function getCookie(name) {
     let cookieValue = null;
@@ -38,7 +44,6 @@ const msg_con = document.getElementById('select_char')
 msg_con.innerHTML = msg;
 
 
-
 let keys_row = document.getElementById('keys_row')
 
 // const getSelectedchar = (char) => {
@@ -49,7 +54,8 @@ let keys_row = document.getElementById('keys_row')
 // }
 
 // Permutation function
-const do_permutation = (char) => {
+
+const do_permutation = (variables, combination_set) => {
     fetch('/calculator/get-permutation', {
         method: 'POST',
         headers: {
@@ -59,25 +65,67 @@ const do_permutation = (char) => {
         },
         body: JSON.stringify({
             payload:{
-                char: char,
+                char: variables,
 
             }
         })
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data.data)
+        data = data.data
+        appendData(data)
+        console.log(data[i])
+        console.log(appendChild.data)
+
+        // combination_set.add(str(data.data))
+        // console.log('Combination', combination_set)
+        
+        // console.log('Combination', setResult(data.data, combination_set))
+
+        // data.data.forEach(variable => {
 
 
+
+        //     const markup = `<div class="form-check">
+        //     <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1">${data.data}
+        //     <label class="form-check-label" for="radio1"></label>
+        //   </div>`
+        //   document.getElementById("perm_result_con").innerHTML = markup
+        // });
+        // let data = data.data
+        console.log('SERVER', data)
+        // res = data.data
+        
     })
     .catch((error) => {
 
     })
 }
 
+const appendData = (data) => {
+    var mainContainer = document.getElementById('perm_result_con')
+    for (let i = 0; i < data.length; i++) {
+    //   console.log(data[i])
+      var div = document.createElement("div")
+      div.innerHTML = `<div class="form-check" style="display:inline">
+        <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1">${data[i]}
+      <label class="form-check-label" for="radio1"></label>
+     </div>`
+      mainContainer.appendChild(div)
+    
+
+    }
+}
+
 const removeEl = (el) => {
     el.remove();
 }
+
+const setResult = (combination_set, res) => {
+    combination_set.add(data.data)
+    return combination_set
+}
+
 
 const createEl = (char) => {
     var card_body = document.getElementById('card_body')
@@ -93,14 +141,19 @@ const createEl = (char) => {
 
     }
 
-    console.log(selectedChars)
+    // console.log('selected', selectedChars)
  
     el.innerHTML = `<div data-char="${char}">${char}</div>`
 
     document.getElementById('char_row').appendChild(el)
     el.onclick = function(el) {
-        console.log('Element clicked', char)
-        do_permutation(char)
+        // console.log('Element clicked', char)
+
+        variable.add(char)
+        const variables = Array.from(variable).join('');
+        // console.log('Variables', variables)
+
+        do_permutation(variables)
         // removeEl(el)
         this.classList.add("disabledbutton")
     }
@@ -110,14 +163,11 @@ const createEl = (char) => {
 
 
 
-
-
 for (var x = 0; x < keys.length; x++) {
     keys[x].onclick = function(){
 
         let char = this.getAttribute('data-char')
-        
-     
+    
         createEl(char)
         // do_permutation(char)
         
