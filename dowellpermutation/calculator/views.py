@@ -115,7 +115,7 @@ def perm(request):
             # word = 'abc'
             permu = do_permutation(word)
             print(permu)
-
+          
 
             
         
