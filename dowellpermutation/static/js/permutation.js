@@ -72,10 +72,32 @@ const do_permutation = (variables, combination_set) => {
     })
     .then(response => response.json())
     .then(data => {
-        data = data.data
-        appendData(data)
-        console.log(data[i])
-        console.log(appendChild.data)
+        var main_con = document.getElementById('perm_result_con')
+        var li = document.createElement("p")
+        li.innerHTML = `<div class="form-check">
+      <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1">${data.data}
+   <label class="form-check-label" for="radio1"></label>
+</div>`
+        main_con.appendChild(li)
+
+
+
+        // data.data.forEach(element => {
+        //     const markup = element
+        //     var main_con = document.getElementById('perm_result_con')
+        //     var li = document.createElement("li")
+        //     console.log(markup)
+
+        //     li.innerHTML = markup
+        //     main_con.appendChild(li)
+
+        //     // document.querySelector('ul').insertAdjacentHTML('beforeend', markup)
+        // });
+
+        // data = data.data
+        // appendData(data)
+        // console.log(data[i])
+        // console.log(appendChild.data)
 
         // combination_set.add(str(data.data))
         // console.log('Combination', combination_set)
@@ -104,11 +126,14 @@ const do_permutation = (variables, combination_set) => {
 
 const appendData = (data) => {
     var mainContainer = document.getElementById('perm_result_con')
+ 
     for (let i = 0; i < data.length; i++) {
+        console.log(data)
+
     //   console.log(data[i])
-      var div = document.createElement("div")
+      var div = document.createElement("li")
       div.innerHTML = `<div class="form-check" style="display:inline">
-        <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1">${data[i]}
+        <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1">${data}
       <label class="form-check-label" for="radio1"></label>
      </div>`
       mainContainer.appendChild(div)
