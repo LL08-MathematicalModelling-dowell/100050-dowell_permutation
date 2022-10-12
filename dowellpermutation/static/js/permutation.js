@@ -1,4 +1,5 @@
-// Variable declaration
+// Variable declarationvar
+var msg = null
 
 let keys = document.querySelectorAll('.key--letter');
 const n_data = localStorage.getItem("n");
@@ -10,10 +11,6 @@ const charstore = document.getElementById('charstore')
 const selectedChars = new Set();
 const variable = new Set();
 const combination_set = new Set();
-
-// const variable = new Set(['a', 'b', 'c']);
-
-// initialize checkbox variable 
 
 
 // CSRF TOKEN
@@ -39,8 +36,8 @@ document.getElementById("perm_result").innerHTML = `Total number of permutations
 document.getElementById('n').innerHTML = `Total amount in a set ‘n’ = <strong>${n_data}</strong>`;
 document.getElementById('r').innerHTML = `Amount in each subset ‘r’ = <strong>${r_data}</strong>`;
 
-// Show the number of elements to be selected
-const msg = `<span>Select ${n_data} variables from the keybord<span>`;
+// // Show the number of elements to be selected
+// const msg = `<span>Select ${n_data} variables from the keybord<span>`;
 const msg_con = document.getElementById('select_char')
 msg_con.innerHTML = msg;
 
@@ -78,8 +75,15 @@ const do_permutation = (variables, combination_set) => {
         
     })
     .catch((error) => {
-
+        console.log(error)
     })
+}
+
+// create a helper function
+const setAttributes = (el, attrs) => {
+    for(var key in attrs) {
+      el.setAttribute(key, attrs[key]);
+    }
 }
 
 const appendData = (data) => {
@@ -110,6 +114,7 @@ const appendData = (data) => {
     })
 }
 
+
 const removeEl = (el) => {
     el.remove();
 }
@@ -126,9 +131,11 @@ const createEl = (char) => {
     el.classList.add("key--letter");
     selectedChars.add(char)
     if (selectedChars.size > n_data) {
-        alert(`Not allowed, you can't select more than ${n_data} variables`)
+        msg = `Not allowed, you can't select more than ${n_data} variables`
+        warningModal('Invalid Input', msg)
+        // alert(`Not allowed, you can't select more than ${n_data} variables`)
         main_key.classList.add("disabledbutton")
-        char = none
+        // char = none
        
 
     }
@@ -158,3 +165,35 @@ for (var x = 0; x < keys.length; x++) {
         
     }
 };
+
+var modalWrap = null;
+const warningModal = (title, desc) => {
+    if (modalWrap !== null) {
+        modalWrap.remove()
+    }
+
+    modalWrap = document.createElement('div');
+    modalWrap.innerHTML = `
+    <div class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">${title}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>${desc}.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Yep</button>
+            </div>
+            </div>
+        </div>
+    </div>
+    `;
+    document.body.append(modalWrap);
+
+    var modal = new bootstrap.Modal(modalWrap.querySelector('.modal'))
+    modal.show();
+}
