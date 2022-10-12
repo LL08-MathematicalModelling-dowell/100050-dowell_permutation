@@ -12,7 +12,7 @@ const selectedChars = new Set();
 const variable = new Set();
 const combination_set = new Set();
 
-/
+
 // CSRF TOKEN
 function getCookie(name) {
     let cookieValue = null;
