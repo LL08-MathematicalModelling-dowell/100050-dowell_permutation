@@ -89,29 +89,50 @@ const setAttributes = (el, attrs) => {
 const appendData = (data) => {
     const variable = new Set();
 
-    var main_con = document.getElementById('perm_result_con')
-    var li = document.createElement("p")
-    li.innerHTML = `<div class="form-check" style="display:inline">
-            <input type="checkbox" name="checkbox" class="form-check-input" id="radio1" name="optradio" value="${data.data}">${data.data}
-        <label class="form-check-label" for="radio1"></label>
-        </div>`
-    main_con.appendChild(li)
+    // var main_con = document.getElementById('perm_result_con')
+    // var li = document.createElement("p")
+    // li.innerHTML = `<div class="form-check" style="display:inline">
+    //         <input type="checkbox" name="checkbox" class="form-check-input" id="radio1" name="optradio" value="${data.data}">${data.data}
+    //     <label class="form-check-label" for="radio1"></label>
+    //     </div>`
+    // main_con.appendChild(li)
 
+    // // checkbox
+    // const checkbox = document.querySelector("input[name=checkbox]");
+    // variable.add(checkbox.value)
 
-    // checkbox
-    const checkbox = document.querySelector("input[name=checkbox]");
-    variable.add(checkbox.value)
-    console.log(variable)
+    var show_d = document.getElementById("show")
+   
+    let text = ""
+    for (let i = 0; i < data.data.length; i++) { 
 
+        // text += cars[i] + "<br>";
+        console.log(data.data[i])
+        var span = document.createElement("span")
+        span.innerHTML = `<div class="key--letter btn btn-primary mt-1" data-char="${data.data[i]}">${data.data[i]}</div> `
 
-    checkbox.addEventListener('change', e =>{
-        if (e.target.checked) {
+        console.log(span)
+        document.getElementById("show").appendChild(span)
+        span.addEventListener('click', function(params) {
+            console.log("span clicked", typeof(data.data[i]))
             
-            // do_permutation(variables)
-            console.log("Checked")
-            console.log(variable)
-        }
-    })
+            do_permutation(data.data[i])
+            
+        })
+
+      
+        // show_d.appendChild(span)
+    }
+
+
+    // checkbox.addEventListener('change', e =>{
+    //     if (e.target.checked) {
+            
+    //         // do_permutation(variables)
+    //         // console.log("Checked")
+    //         // console.log("Variable", variable)
+    //     }
+    // })
 }
 
 
@@ -135,12 +156,11 @@ const createEl = (char) => {
         warningModal('Invalid Input', msg)
         // alert(`Not allowed, you can't select more than ${n_data} variables`)
         main_key.classList.add("disabledbutton")
-        // char = none
+        char = none
        
 
     }
 
- 
     el.innerHTML = `<div data-char="${char}">${char}</div>`
 
     document.getElementById('char_row').appendChild(el)
@@ -148,7 +168,9 @@ const createEl = (char) => {
         // console.log('Element clicked', char)
         variable.add(char)
         const variables = Array.from(variable).join('');
-        // console.log('Variables', variables)
+        console.log('Variables', typeof(variables), variables)
+        
+        
         do_permutation(variables)
         // removeEl(el)
         this.classList.add("disabledbutton")
