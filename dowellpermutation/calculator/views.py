@@ -98,7 +98,7 @@ def permutations(request):
         return HttpResponseBadRequest('Invalid request')
 
 
-# @csrf_exempt
+@csrf_exempt
 def perm(request):
     method = request.method
     is_ajax = request.headers.get('X-Requested-with') == 'XMLHttpRequest'
