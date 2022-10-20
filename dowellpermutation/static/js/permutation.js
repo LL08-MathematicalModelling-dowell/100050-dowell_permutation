@@ -104,25 +104,26 @@ const appendData = (data) => {
     var show_d = document.getElementById("show")
    
     let text = ""
-    for (let i = 0; i < data.data.length; i++) { 
+    // for (let i = 0; i < data.data.length; i++) { 
+        document.getElementById("show").innerHTML = `<div class="key--letter btn btn-primary mt-1" data-char="${data.data}">${data.data}</div> `
+        console.log(data.data)
+        // text += vars[i] + "<br>";
+        // console.log(data.data[i])
+        // var span = document.createElement("span")
+        // span.innerHTML = `<div class="key--letter btn btn-primary mt-1" data-char="${data.data[i]}">${data.data[i]}</div> `
 
-        // text += cars[i] + "<br>";
-        console.log(data.data[i])
-        var span = document.createElement("span")
-        span.innerHTML = `<div class="key--letter btn btn-primary mt-1" data-char="${data.data[i]}">${data.data[i]}</div> `
-
-        console.log(span)
-        document.getElementById("show").appendChild(span)
-        span.addEventListener('click', function(params) {
-            console.log("span clicked", typeof(data.data[i]))
+        // console.log(span)
+        // document.getElementById("show").appendChild(span)
+        // span.addEventListener('click', function(params) {
+        //     console.log("span clicked", typeof(data.data[i]))
             
-            do_permutation(data.data[i])
+        //     do_permutation(data.data[i])
             
-        })
+        // })
 
       
         // show_d.appendChild(span)
-    }
+    // }
 
 
     // checkbox.addEventListener('change', e =>{
