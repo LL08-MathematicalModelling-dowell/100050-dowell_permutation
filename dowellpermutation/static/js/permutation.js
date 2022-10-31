@@ -70,7 +70,7 @@ const do_permutation = (variables, combination_set) => {
     })
     .then(response => response.json())
     .then(data => {
-       
+       console.log(data)
         appendData(data)
         
     })
@@ -88,53 +88,98 @@ const setAttributes = (el, attrs) => {
 
 const appendData = (data) => {
     const variable = new Set();
-
-    // var main_con = document.getElementById('perm_result_con')
-    // var li = document.createElement("p")
-    // li.innerHTML = `<div class="form-check" style="display:inline">
-    //         <input type="checkbox" name="checkbox" class="form-check-input" id="radio1" name="optradio" value="${data.data}">${data.data}
-    //     <label class="form-check-label" for="radio1"></label>
-    //     </div>`
-    // main_con.appendChild(li)
-
-    // // checkbox
-    // const checkbox = document.querySelector("input[name=checkbox]");
-    // variable.add(checkbox.value)
-
     var show_d = document.getElementById("show")
-   
     let text = ""
-    for (let i = 0; i < data.data.length; i++) { 
+    // for (let i = 0; i < data.data.length; i++) { 
 
-        // text += cars[i] + "<br>";
-        console.log(data.data[i])
-        var span = document.createElement("span")
-        span.innerHTML = `<div class="key--letter btn btn-primary mt-1" data-char="${data.data[i]}">${data.data[i]}</div> `
-
-        console.log(span)
-        document.getElementById("show").appendChild(span)
-        span.addEventListener('click', function(params) {
-            console.log("span clicked", typeof(data.data[i]))
-            
-            do_permutation(data.data[i])
-            
-        })
-
-      
-        // show_d.appendChild(span)
-    }
-
-
-    // checkbox.addEventListener('change', e =>{
-    //     if (e.target.checked) {
-            
-    //         // do_permutation(variables)
-    //         // console.log("Checked")
-    //         // console.log("Variable", variable)
+    //     // text += cars[i] + "<br>";
+    //     console.log(data.data[i])
+        
+    //     //if only one data is returned
+    //     if (data.data.length == 1) {
+    //         //create span element and append to the show
+           
+    //         var span = document.createElement("span");
+    //         span.innerHTML = `<div class="key--letter btn btn-primary mt-1" data-char="${data.data[i]}">${data.data[i]}</div> `
+    //         show_d.appendChild(span)
+    //         span.addEventListener('click', function(params) {
+    //             do_permutation(data.data[i])
+    //         })
     //     }
-    // })
+    //     else {
+            
+    //         for (let i = 0; i < data.data.length; i++) {
+    //             var span = document.createElement("span");
+    //             span.innerHTML = `<div class="key--letter btn btn-primary mt-1" data-char="${data.data[i]}">${data.data[i]}</div> `
+    //             show_d.appendChild(span)
+    //             //add event listener to the span
+    //             span.addEventListener('click', function(params) {
+    //                 do_permutation(data.data[i])
+    //             })
+    //         }
+
+    //     }
+     
+      
+
+    // }
+
+
+    //append data to show_d
+    // data.data.forEach(element => {
+    //     var span = document.createElement("span");
+    //     span.innerHTML = `<div class="key--letter btn btn-primary mt-1" data-char="${element}">${element}</div> `
+    //     //clear the show_d
+    //     show_d.innerHTML = ""
+    //     show_d.appendChild(span)        
+    //     span.addEventListener('click', function(params) {
+    //         do_permutation(element)
+    //     })   
+    // });
+    show_d.innerHTML = ""
+    for (let i = 0; i < data.data.length; i++) {
+        
+       if (data.data.length == 1) {
+        console.log("one")
+           var span = document.createElement("span");
+           span.innerHTML = `<div class="key--letter btn btn-primary mt-1" data-char="${data.data[i]}">${data.data[i]}</div> `
+          
+           show_d.appendChild(span)
+        //    span.addEventListener('click', function(params) {
+        //        do_permutation(data.data[i])
+        //    })
+       }
+    else{
+        console.log("else called")
+        var span = document.createElement("span");
+        span.innerHTML = `<div class="key--letter btn btn-primary mt-1" data-char="${data.data[i]}">${data.data[i]}</div> `
+        
+        show_d.appendChild(span)
+        // span.addEventListener('click', function(params) {
+        //     do_permutation(data.data[i])
+        // })
+        //add event listener to select current span
+        span.addEventListener('click', function(params) {
+            //select the current span
+            const current_span = params.target
+            //get the data-char
+            const current_char = current_span.getAttribute('data-char')
+            console.log(current_char)
+            replace_span(current_char)
+        })
+    }  
+    }
 }
 
+function replace_span(current_char) {
+    //get the show_d
+    const show_d = document.getElementById('show')
+    show_d.innerHTML = ""
+    //create a new span
+    var span = document.createElement("span");
+    span.innerHTML = `<div class="key--letter btn btn-primary mt-1" data-char="${current_char}">${current_char}</div> `
+    show_d.appendChild(span)
+}
 
 const removeEl = (el) => {
     el.remove();
@@ -156,7 +201,7 @@ const createEl = (char) => {
         warningModal('Invalid Input', msg)
         // alert(`Not allowed, you can't select more than ${n_data} variables`)
         main_key.classList.add("disabledbutton")
-        char = none
+        char = ""
        
 
     }
