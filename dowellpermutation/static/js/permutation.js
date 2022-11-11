@@ -58,7 +58,7 @@ let keys_row = document.getElementById('keys_row')
 //3
 const do_permutation = (variables) => {
     $.ajax({
-        url: 'http://127.0.0.1:8000/api/calculateperm/',
+        url: 'http://100050.pythonanywhere.com/api/calculateperm/',
         type: 'POST',
         data: {
             char: variables,
@@ -118,7 +118,7 @@ const appendData = (data) => {
 const saveData = (data) => {
     console.log("save data", data)
     $.ajax({
-        url: 'http://127.0.0.1:8000/api/save/',
+        url: 'http://100050.pythonanywhere.com/api/save/',
         type: 'POST',
         data: {
             char: data,
@@ -177,7 +177,7 @@ const appendData2 = (data) => {
 
 const clearSession = () => {
 $.ajax({
-    url: 'http://127.0.0.1:8000/api/clear_session/',
+    url: 'http://100050.pythonanywhere.com/api/clear_session/',
     type: 'POST',
     success: function(data) {
         console.log(data)
