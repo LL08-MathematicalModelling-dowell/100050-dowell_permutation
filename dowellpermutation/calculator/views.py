@@ -7,7 +7,6 @@ from django.views import View
 import json
 
 # import pymongo
-import pandas as pd
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 from .do_permutation import do_permutation
