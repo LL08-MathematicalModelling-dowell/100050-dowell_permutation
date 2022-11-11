@@ -6,6 +6,7 @@ const n_data = localStorage.getItem("n");
 const r_data = localStorage.getItem("r");
 const permutation_data = localStorage.getItem("result");
 const charstore = document.getElementById('charstore')
+const result_row = document.getElementById('result_row');
 
 // where to append the selected characters
 const selectedChars = new Set();
@@ -23,7 +24,7 @@ function getCookie(name) {
             // Check if this cookie string begin with the name we want
             if (cookie.substring(0, name.length + 1) === (name + "=")) {
                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-               
+
                 break;
             }
         }
@@ -42,7 +43,7 @@ const msg_con = document.getElementById('select_char')
 msg_con.innerHTML = msg;
 
 
-// Instatiate keys 
+// Instatiate keys
 let keys_row = document.getElementById('keys_row')
 
 // const getSelectedchar = (char) => {
@@ -53,31 +54,141 @@ let keys_row = document.getElementById('keys_row')
 // }
 
 
-// Permutation function
-const do_permutation = (variables, combination_set) => {
-    fetch('/calculator/get-permutation', {
-        method: 'POST',
-        headers: {
-            'X-Requested-With': 'XMLHttpRequest',
-            'Content-Type': 'application/json',
-            'X-CSRFToken': getCookie("csrftoken"),
+
+//3
+const do_permutation = (variables) => {
+    $.ajax({
+        url: 'http://127.0.0.1:8000/api/calculateperm/',
+        type: 'POST',
+        data: {
+            char: variables,
         },
-        body: JSON.stringify({
-            payload:{
-                char: variables,
-            }
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-       console.log(data)
-        appendData(data)
-        
-    })
-    .catch((error) => {
-        console.log(error)
+        success: function(data) {
+            console.log(data)
+            appendData(data)
+        },
+        error: function(data) {
+            console.log(data)
+        },
     })
 }
+
+//4
+const appendData = (data) => {
+    const show_d = document.getElementById('show')
+    //clear the previous data
+    show_d.innerHTML = ""
+
+    //check if the length of the data is one create a div and append it
+    if (data.length == 1) {
+        var el = document.createElement("div");
+        el.classList.add("key--letter");
+        el.innerHTML = `<div data-char="${data}">${data}</div>`
+        show_d.appendChild(el)
+        el.onclick = function(el) {
+            saveData(data)
+        }
+        //also display small message below this element
+        const msg = `<span>Click on the character to save it<span>`;
+        const msg_con = document.getElementById('msg')
+        msg_con.innerHTML = '';
+        msg_con.innerHTML = msg;
+
+    }
+    else {
+        for (let i = 0; i < data.length; i++) {
+            var el = document.createElement("div");
+            el.classList.add("key--letter");
+            el.innerHTML = `<div data-char="${data[i]}">${data[i]}</div>`
+            show_d.appendChild(el)
+            el.onclick = function(el) {
+                saveData(data[i])
+            }
+              //also display small message below this element
+            const msg = `<span>Click on the any character from above to save it<span>`;
+            const msg_con = document.getElementById('msg')
+            msg_con.innerHTML = '';
+            msg_con.innerHTML = msg;
+        }
+    }
+
+}
+
+//5
+const saveData = (data) => {
+    console.log("save data", data)
+    $.ajax({
+        url: 'http://127.0.0.1:8000/api/save/',
+        type: 'POST',
+        data: {
+            char: data,
+        },
+        success: function(data) {
+            console.log("resp from save :",data);
+            appendData2(data);
+        },
+        error: function(data) {
+            console.log(data)
+        },
+    })
+}
+
+//4
+const appendData2 = (data) => {
+    const show_d = document.getElementById('show')
+    //clear the previous data
+    show_d.innerHTML = ""
+
+    //check if the length of the data is one create a div and append it
+    if (data.length == 1) {
+        var el = document.createElement("div");
+        el.classList.add("key--letter");
+        el.innerHTML = `<div data-char="${data}">${data}</div>`
+        show_d.appendChild(el)
+        el.onclick = function(el) {
+            saveData(data)
+        }
+        const msg = `<span>Now Select any character from above<span>`;
+        const msg_con = document.getElementById('msg')
+        msg_con.innerHTML = '';
+        msg_con.innerHTML = msg;
+
+    }
+    else {
+        for (let i = 0; i < data.length; i++) {
+            var el = document.createElement("div");
+            el.classList.add("key--letter");
+            el.innerHTML = `<div data-char="${data[i]}">${data[i]}</div>`
+            show_d.appendChild(el)
+            el.onclick = function(el) {
+                saveData(data[i])
+            }
+            const msg = `<span>Now Select any character from above<span>`;
+            const msg_con = document.getElementById('msg')
+            msg_con.innerHTML = '';
+            msg_con.innerHTML = msg;
+        }
+    }
+
+}
+
+//whenever page refresh send a request to the server to clear session in the server
+
+const clearSession = () => {
+$.ajax({
+    url: 'http://127.0.0.1:8000/api/clear_session/',
+    type: 'POST',
+    success: function(data) {
+        console.log(data)
+    },
+    error: function(data) {
+        console.log(data)
+    }
+})
+}
+
+//call the clear session function on page load
+clearSession()
 
 // create a helper function
 const setAttributes = (el, attrs) => {
@@ -86,100 +197,7 @@ const setAttributes = (el, attrs) => {
     }
 }
 
-const appendData = (data) => {
-    const variable = new Set();
-    var show_d = document.getElementById("show")
-    let text = ""
-    // for (let i = 0; i < data.data.length; i++) { 
 
-    //     // text += cars[i] + "<br>";
-    //     console.log(data.data[i])
-        
-    //     //if only one data is returned
-    //     if (data.data.length == 1) {
-    //         //create span element and append to the show
-           
-    //         var span = document.createElement("span");
-    //         span.innerHTML = `<div class="key--letter btn btn-primary mt-1" data-char="${data.data[i]}">${data.data[i]}</div> `
-    //         show_d.appendChild(span)
-    //         span.addEventListener('click', function(params) {
-    //             do_permutation(data.data[i])
-    //         })
-    //     }
-    //     else {
-            
-    //         for (let i = 0; i < data.data.length; i++) {
-    //             var span = document.createElement("span");
-    //             span.innerHTML = `<div class="key--letter btn btn-primary mt-1" data-char="${data.data[i]}">${data.data[i]}</div> `
-    //             show_d.appendChild(span)
-    //             //add event listener to the span
-    //             span.addEventListener('click', function(params) {
-    //                 do_permutation(data.data[i])
-    //             })
-    //         }
-
-    //     }
-     
-      
-
-    // }
-
-
-    //append data to show_d
-    // data.data.forEach(element => {
-    //     var span = document.createElement("span");
-    //     span.innerHTML = `<div class="key--letter btn btn-primary mt-1" data-char="${element}">${element}</div> `
-    //     //clear the show_d
-    //     show_d.innerHTML = ""
-    //     show_d.appendChild(span)        
-    //     span.addEventListener('click', function(params) {
-    //         do_permutation(element)
-    //     })   
-    // });
-    show_d.innerHTML = ""
-    for (let i = 0; i < data.data.length; i++) {
-        
-       if (data.data.length == 1) {
-        console.log("one")
-           var span = document.createElement("span");
-           span.innerHTML = `<div class="key--letter btn btn-primary mt-1" data-char="${data.data[i]}">${data.data[i]}</div> `
-          
-           show_d.appendChild(span)
-        //    span.addEventListener('click', function(params) {
-        //        do_permutation(data.data[i])
-        //    })
-       }
-    else{
-        console.log("else called")
-        var span = document.createElement("span");
-        span.innerHTML = `<div class="key--letter btn btn-primary mt-1" data-char="${data.data[i]}">${data.data[i]}</div> `
-        
-        show_d.appendChild(span)
-        // span.addEventListener('click', function(params) {
-        //     do_permutation(data.data[i])
-        // })
-        //add event listener to select current span
-        span.addEventListener('click', function(params) {
-            //select the current span
-            const current_span = params.target
-            //get the data-char
-            const current_char = current_span.getAttribute('data-char')
-            console.log(current_char)
-            replace_span(current_char)
-        })
-    }  
-    }
-}
-
-function replace_span(current_char) {
-    //get the show_d
-    const show_d = document.getElementById('show')
-    show_d.innerHTML = ""
-    //create a new span
-    var span = document.createElement("span");
-    span.innerHTML = `<div class="key--letter btn btn-primary mt-1" data-char="${current_char}">${current_char}</div> `
-    show_d.appendChild(span)
-}
 
 const removeEl = (el) => {
     el.remove();
@@ -190,7 +208,7 @@ const setResult = (combination_set, res) => {
     return combination_set
 }
 
-
+//2
 const createEl = (char) => {
     var card_body = document.getElementById('card_body')
     var el = document.createElement("div");
@@ -202,34 +220,25 @@ const createEl = (char) => {
         // alert(`Not allowed, you can't select more than ${n_data} variables`)
         main_key.classList.add("disabledbutton")
         char = ""
-       
-
     }
-
     el.innerHTML = `<div data-char="${char}">${char}</div>`
-
     document.getElementById('char_row').appendChild(el)
     el.onclick = function(el) {
         // console.log('Element clicked', char)
-        variable.add(char)
-        const variables = Array.from(variable).join('');
-        console.log('Variables', typeof(variables), variables)
-        
-        
-        do_permutation(variables)
+        // variable.add(char)
+        // const variables = Array.from(variable).join('');
+        // console.log('Variables', typeof(variables), variables)
+        do_permutation(char)
         // removeEl(el)
         this.classList.add("disabledbutton")
     }
 }
 
-
+//1
 for (var x = 0; x < keys.length; x++) {
     keys[x].onclick = function(){
         let char = this.getAttribute('data-char')
-
         createEl(char)
-        // do_permutation(char)
-        
     }
 };
 
@@ -264,3 +273,6 @@ const warningModal = (title, desc) => {
     var modal = new bootstrap.Modal(modalWrap.querySelector('.modal'))
     modal.show();
 }
+
+
+

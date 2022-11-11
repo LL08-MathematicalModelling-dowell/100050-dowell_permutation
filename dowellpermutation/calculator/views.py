@@ -110,7 +110,8 @@ def perm(request):
           
             
             word = payload['char']
-        
+
+            print(word)
                 
             # word = 'abc'
             permu = do_permutation(word)

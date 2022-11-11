@@ -31,6 +31,11 @@ DJANGO_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'rest_framework',
+    'corsheaders',
+    'api',
+
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PATRTY_APPS + LOCAL_APPS
