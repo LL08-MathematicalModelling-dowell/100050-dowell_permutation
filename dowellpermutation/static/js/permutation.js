@@ -155,19 +155,20 @@ const appendData2 = (data) => {
 
     }
     else {
-        for (let i = 0; i < data.length; i++) {
-            var el = document.createElement("div");
-            el.classList.add("key--letter");
-            el.innerHTML = `<div data-char="${data[i]}">${data[i]}</div>`
-            show_d.appendChild(el)
-            el.onclick = function(el) {
-                saveData(data[i])
-            }
-            const msg = `<span>Now Select any character from above<span>`;
-            const msg_con = document.getElementById('msg')
-            msg_con.innerHTML = '';
-            msg_con.innerHTML = msg;
+        var el = document.createElement("div");
+        el.classList.add("key--letter");
+        // for (let i = 0; i < data.length; i++) {
+        //     el.innerHTML = `<div data-char="${data[i]}">${data[i]}</div>`
+        // }
+        el.innerHTML = `<div data-char="${data}">${data}</div>`
+        show_d.appendChild(el)
+        el.onclick = function(el) {
+            saveData(data[i])
         }
+        const msg = `<span>Now Select any character from above<span>`;
+        const msg_con = document.getElementById('msg')
+        msg_con.innerHTML = '';
+        msg_con.innerHTML = msg;
     }
 
 }
