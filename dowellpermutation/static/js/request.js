@@ -32,7 +32,7 @@ const calculatePerm = (e) => {
     e.preventDefault()
     let result = 0
 
-    fetch('/calculator/calcpermutations/', {
+    fetch('http://100050.pythonanywhere.com/calculator/calcpermutations/', {
         method: 'POST',
         headers: {
             'X-Requested-With': 'XMLHttpRequest',

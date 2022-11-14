@@ -50,7 +50,7 @@ let keys_row = document.getElementById('keys_row')
 const do_permutation = (variables) => {
     console.log("variables", variables)
     $.ajax({
-        url: 'http://127.0.0.1:8000/calculator/calculateperm/',
+        url: 'http://100050.pythonanywhere.com/calculator/calculateperm/',
         type: 'POST',
         data: {
             char: variables,
@@ -113,7 +113,7 @@ const appendData = (data) => {
 const saveData = (data) => {
     console.log("save data", data)
     $.ajax({
-        url: 'http://127.0.0.1:8000/calculator/permutations/save/',
+        url: 'http://100050.pythonanywhere.com/calculator/permutations/save/',
         type: 'POST',
         data: {
             char: data,
@@ -175,7 +175,7 @@ const appendData2 = (data) => {
 
 const clearSession = () => {
 $.ajax({
-    url: '/calculator/clear_session/',
+    url: 'http://100050.pythonanywhere.com/calculator/clear_session/',
     type: 'POST',
     headers:{
         "X-CSRFToken": getCookie("csrftoken")
