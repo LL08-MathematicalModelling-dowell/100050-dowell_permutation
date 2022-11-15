@@ -7,9 +7,14 @@ const r_data = localStorage.getItem("r");
 const permutation_data = localStorage.getItem("result");
 const charstore = document.getElementById('charstore')
 const result_row = document.getElementById('result_row');
+const select_n = document.getElementById('select_n');
+const select_r = document.getElementById('select_r');
+const select_any = document.getElementById('select_any');
+select_n.innerHTML = `Select ${n_data} variables from the keyboard above`;
 
 // where to append the selected characters
 const selectedChars = new Set();
+const selectedChars2 = new Set();
 const variable = new Set();
 const combination_set = new Set();
 
@@ -50,7 +55,7 @@ let keys_row = document.getElementById('keys_row')
 const do_permutation = (variables) => {
     console.log("variables", variables)
     $.ajax({
-        url: 'http://100050.pythonanywhere.com/calculator/calculateperm/',
+        url: 'https://www.pythonanywhere.com/calculator/calculateperm/',
         type: 'POST',
         data: {
             char: variables,
@@ -113,7 +118,7 @@ const appendData = (data) => {
 const saveData = (data) => {
     console.log("save data", data)
     $.ajax({
-        url: 'http://100050.pythonanywhere.com/calculator/permutations/save/',
+        url: 'https://www.pythonanywhere.com/calculator/permutations/save/',
         type: 'POST',
         data: {
             char: data,
@@ -146,7 +151,7 @@ const appendData2 = (data) => {
         el.onclick = function(el) {
             saveData(data)
         }
-        const msg = `<span>Now Select any character from above<span>`;
+        const msg = `<span>Now Select any variable from above<span>`;
         const msg_con = document.getElementById('msg')
         msg_con.innerHTML = '';
         msg_con.innerHTML = msg;
@@ -163,7 +168,7 @@ const appendData2 = (data) => {
         el.onclick = function(el) {
             saveData(data[i])
         }
-        const msg = `<span>Now Select any character from above<span>`;
+        const msg = `<span>Now Select any variable from above<span>`;
         const msg_con = document.getElementById('msg')
         msg_con.innerHTML = '';
         msg_con.innerHTML = msg;
@@ -175,7 +180,7 @@ const appendData2 = (data) => {
 
 const clearSession = () => {
 $.ajax({
-    url: 'http://100050.pythonanywhere.com/calculator/clear_session/',
+    url: 'https://www.pythonanywhere.com/calculator/clear_session/',
     type: 'POST',
     headers:{
         "X-CSRFToken": getCookie("csrftoken")
@@ -219,20 +224,41 @@ const createEl = (char) => {
     if (selectedChars.size > n_data) {
         msg = `Not allowed, you can't select more than ${n_data} variables`
         warningModal('Invalid Input', msg)
-        // alert(`Not allowed, you can't select more than ${n_data} variables`)
         main_key.classList.add("disabledbutton")
         char = ""
+        select_r.innerHTML = `Select any ${r_data} variables from the above selected variables`;
+        return
     }
+
     el.innerHTML = `<div data-char="${char}">${char}</div>`
     document.getElementById('char_row').appendChild(el)
     el.onclick = function(el) {
-        // console.log('Element clicked', char)
-        // variable.add(char)
-        // const variables = Array.from(variable).join('');
-        // console.log('Variables', typeof(variables), variables)
-        do_permutation(char)
-        // removeEl(el)
+        //do_permutation(char)
+        createEL_r(char)
         this.classList.add("disabledbutton")
+
+    }
+}
+
+const createEL_r = (char) => {
+    var card_body = document.getElementById('card_body')
+    var el = document.createElement("div");
+    el.classList.add("key--letter");
+    selectedChars2.add(char)
+    if (selectedChars2.size > r_data) {
+        msg = `Not allowed, you can't select more than ${r_data} variables`
+        warningModal('Invalid Input', msg)
+        main_key.classList.add("disabledbutton");
+        char = "";
+        select_any.innerHTML = `Select any variables from the above selected variables`;
+        return
+    }
+    el.innerHTML = `<div data-char="${char}">${char}</div>`
+    document.getElementById('char_row2').appendChild(el)
+    el.onclick = function(el) {
+        do_permutation(char)
+        this.classList.add("disabledbutton")
+
     }
 }
 
@@ -274,6 +300,8 @@ const warningModal = (title, desc) => {
 
     var modal = new bootstrap.Modal(modalWrap.querySelector('.modal'))
     modal.show();
+
+
 }
 
 
