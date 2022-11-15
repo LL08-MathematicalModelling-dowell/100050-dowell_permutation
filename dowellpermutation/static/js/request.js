@@ -39,6 +39,7 @@ const calculatePerm = (e) => {
             'Content-Type': 'application/json',
             'X-CSRFToken': getCookie("csrftoken"),
         },
+        redirect: 'follow',
 
         body: JSON.stringify({
             payload: {
