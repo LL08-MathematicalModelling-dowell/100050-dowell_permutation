@@ -4,6 +4,8 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from .do_permutation import do_permutation
 
+
+@csrf_exempt
 def calcpermutations(request):
     method = request.method
     is_ajax = request.headers.get('X-Requested-with') == 'XMLHttpRequest'
@@ -43,6 +45,7 @@ def calcpermutations(request):
 def index(request):
     return render(request, 'calculator/index.html')
 
+@csrf_exempt
 def permutataionselect(request):
     return render(request, 'calculator/permutationselect.html')
 
@@ -55,7 +58,7 @@ def permuationsFunction(permutationsVariables, nextVariable):
         permutationsList.append(permutations)
     return permutationsList
 
-
+@csrf_exempt
 def save(request):
     if request.method == 'POST':
         data = request.POST
@@ -72,13 +75,14 @@ def save(request):
             print("Session data :",request.session['session'])
             return JsonResponse(request.session['session'], safe=False,status=200)
 
-
+@csrf_exempt
 def clear_session(request):
     if request.method == 'POST':
         request.session.flush()
         message = "Session cleared"
         return JsonResponse({'data': message},safe=False, status=200)
 
+@csrf_exempt
 def calculateperm(request, format=None):
     if request.method == 'POST':
         try:
