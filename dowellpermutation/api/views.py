@@ -13,22 +13,33 @@ def permuationsFunction(permutationsVariables, nextVariable):
     return permutationsList
 
 
+
+@api_view(['GET','POST'])
+def index(request):
+    return Response({'response': 'Welcome to Dowell Permutation API'}, status=status.HTTP_200_OK)
+
+
 @api_view(['GET', 'POST'])
 def save(request):
     if request.method == 'POST':
         #data = JSONParser().parse(request)
         data = request.data
         print("data ",data)
-        if data.getlist('char[0][]'):
-            print("req data :",data.getlist('char[0][]'))
-            request.session['session'] = data.getlist('char[0][]')
-            print("Session data :",request.session['session'])
-            return Response(request.session['session'], status=status.HTTP_201_CREATED)
-        else:
-            print("req data :",data.getlist('char[]'))
-            request.session['session'] = data.getlist('char[]')
-            print("Session data :",request.session['session'])
-            return Response(request.session['session'], status=status.HTTP_201_CREATED)
+        # if data.getlist('char[0][]'):
+        #     print("req data :",data.getlist('char[0][]'))
+        #     request.session['session'] = data.getlist('char[0][]')
+        #     print("Session data :",request.session['session'])
+        #     return Response(request.session['session'], status=status.HTTP_201_CREATED)
+        # else:
+        #     print("req data :",data.getlist('char[]'))
+        #     request.session['session'] = data.getlist('char[]')
+        #     print("Session data :",request.session['session'])
+        #     return Response(request.session['session'], status=status.HTTP_201_CREATED)
+
+        data = data.get('char')
+        print("data ",data)
+        request.session['session'] = data
+        return Response(request.session['session'], status=status.HTTP_201_CREATED)
 
 @api_view(['GET', 'POST'])
 def clear_session(request):
