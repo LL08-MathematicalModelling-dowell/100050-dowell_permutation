@@ -39,14 +39,13 @@ def save(request):
         data = data.get('char')
         print("data ",data)
         request.session['session'] = data
-        return Response(request.session['session'], status=status.HTTP_201_CREATED)
+        return Response({'saved':request.session['session']}, status=status.HTTP_201_CREATED)
 
-@api_view(['GET', 'POST'])
+@api_view(['GET'])
 def clear_session(request):
-    if request.method == 'POST':
+    if request.method == 'GET':
         request.session.flush()
-        message = "Session cleared"
-        return Response(message,status=status.HTTP_201_CREATED)
+        return Response({'response': 'Session Cleared'}, status=status.HTTP_200_OK)
 
 @api_view(['GET', 'POST'])
 def permutation(request, format=None):
@@ -63,4 +62,4 @@ def permutation(request, format=None):
         print(char)
         permutations = permuationsFunction(sessiondata,char)
         print(permutations)
-        return Response(permutations, status=status.HTTP_201_CREATED)
+        return Response({'permutation': permutations}, status=status.HTTP_201_CREATED)
