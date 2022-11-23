@@ -3,6 +3,8 @@ from django.http import HttpResponse, HttpResponseBadRequest, JsonResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from .do_permutation import do_permutation
+from .population import targeted_population
+from .connection import connection,get_event_id
 
 
 @csrf_exempt
@@ -66,19 +68,31 @@ def save(request):
         # print("data['char[0][]''] ",data['char[0][]'])
         if data.getlist('char[0][]'):
             print("req data :",data.getlist('char[0][]'))
-            request.session['session'] = data.getlist('char[0][]')
-            print("Session data :",request.session['session'])
-            return JsonResponse(request.session['session'], safe=False,status=200)
+            sessiondata = data.getlist('char[0][]')
+            #save in dowell connection
+            command = "insert"
+            eventId = get_event_id()
+            output = connection(command,eventId,sessiondata)
+            print("Session data :",sessiondata)
+            print("Output :",output)
+            return JsonResponse(sessiondata, safe=False,status=200)
         else:
             print("req data :",data.getlist('char[]'))
-            request.session['session'] = data.getlist('char[]')
-            print("Session data :",request.session['session'])
-            return JsonResponse(request.session['session'], safe=False,status=200)
+            sessiondata = data.getlist('char[]')
+            #save in dowell connection
+            command = "insert"
+            eventId = get_event_id()
+            output = connection(command,eventId,sessiondata)
+            print("Session data :",sessiondata)
+            print("Output :",output)
+            return JsonResponse(sessiondata, safe=False,status=200)
 
 @csrf_exempt
 def clear_session(request):
     if request.method == 'POST':
-        request.session.flush()
+        # command = "delete"
+        # eventId = get_event_id()
+        # output = connection(command,eventId,sessiondata)
         message = "Session cleared"
         return JsonResponse({'data': message},safe=False, status=200)
 
@@ -86,7 +100,9 @@ def clear_session(request):
 def calculateperm(request, format=None):
     if request.method == 'POST':
         try:
-            sessiondata = request.session['session']
+            resp = targeted_population("Documentation","permutation",["sessiondata"],"life_time")
+            sessiondata = resp['normal']['data'][0][-1]['sessiondata']
+            print(sessiondata)
         except:
             sessiondata = ''
         #char = JSONParser().parse(request)
