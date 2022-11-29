@@ -233,34 +233,11 @@ const createEl = (char) => {
     el.innerHTML = `<div data-char="${char}">${char}</div>`
     document.getElementById('char_row').appendChild(el)
     el.onclick = function(el) {
-        //do_permutation(char)
-        createEL_r(char)
-        this.classList.add("disabledbutton")
-
-    }
-}
-
-const createEL_r = (char) => {
-    var card_body = document.getElementById('card_body')
-    var el = document.createElement("div");
-    el.classList.add("key--letter");
-    selectedChars2.add(char)
-    if (selectedChars2.size > r_data) {
-        msg = `Not allowed, you can't select more than ${r_data} variables`
-        warningModal('Invalid Input', msg)
-        main_key.classList.add("disabledbutton");
-        char = "";
-        select_any.innerHTML = `Select any variables from the above selected variables`;
-        return
-    }
-    el.innerHTML = `<div data-char="${char}">${char}</div>`
-    document.getElementById('char_row2').appendChild(el)
-    el.onclick = function(el) {
         do_permutation(char)
         this.classList.add("disabledbutton")
-
     }
 }
+
 
 //1
 for (var x = 0; x < keys.length; x++) {
