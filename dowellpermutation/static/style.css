@@ -1,10 +1,8 @@
-
-
-h6 {
-  text-align: center;
-  font-size: 1.8em;
-  font-family: monospace;
-  padding: 0.7em;
+ h6 {
+    text-align: center;
+    font-size: 1.8em;
+    font-family: monospace;
+    padding: 0.7em;
 }
 
 .keyboard {
@@ -15,20 +13,20 @@ h6 {
 
 .keyboard__row {
     display: inline-block;
-    height: 3em;
+    height: auto;
     margin: 0.2em;
 }
 
 .keyboard__row--h1 {
-    height: 1.7em;
+    height: auto;
     line-height: 1.4em;
 }
 
 .keyboard__row--h3 {
-    height: 4.3em;
+    height: auto;
 }
 
-.keyboard__row > * {
+.keyboard__row>* {
     position: relative;
     background: #dedddd;
     text-align: center;
@@ -47,12 +45,12 @@ h6 {
     border-bottom-color: #555;
 }
 
-.keyboard__row--h1 > div {
+.keyboard__row--h1>div {
     width: 3.5em;
 }
 
-.keyboard__row > div[data-pressed],
-.keyboard__row > div:active {
+.keyboard__row>div[data-pressed],
+.keyboard__row>div:active {
     background: #161515;
     color: rgb(249, 244, 244);
     position: relative;
@@ -80,7 +78,7 @@ h6 {
     width: 18em;
 }
 
-.key--double > * {
+.key--double>* {
     padding-top: 0.1em;
 }
 
@@ -88,21 +86,21 @@ h6 {
     line-height: 2.8em;
 }
 
-.key--bottom-left > * {
+.key--bottom-left>* {
     position: absolute;
     text-align: left;
     bottom: 0.4em;
     left: 0.4em;
 }
 
-.key--bottom-right > * {
+.key--bottom-right>* {
     position: absolute;
     text-align: right;
     bottom: 0.4em;
     right: 0.4em;
 }
 
-.key--fn > * {
+.key--fn>* {
     font-size: 0.6em;
     line-height: 1em;
     padding-top: 1.2em;
@@ -111,12 +109,12 @@ h6 {
     float: right;
 }
 
-.key--word > * {
+.key--word>* {
     font-size: 0.8em;
 }
 
-.key--arrow--tall > *,
-.key--arrow > * {
+.key--arrow--tall>*,
+.key--arrow>* {
     font-size: 0.5em;
     line-height: 3em;
 }
@@ -127,29 +125,67 @@ h6 {
     line-height: 0.5em;
 }
 
-.key--arrow--tall > * {
+.key--arrow--tall>* {
     padding-top: 0.2em;
 }
 
-.keyboard > .keyboard__row {
+.keyboard>.keyboard__row {
     text-align: center;
 }
 
-.key--letter{
-        position: relative;
-        background: #dedddd;
-        text-align: center;
-        color: #000;
-        float: left;
-        border-radius: 0.3em;
-        margin: 0.2em;
-        padding: 0.2em;
-        width: 4.3em;
-        height: 100%;
-        box-sizing: border-box;
-        cursor: pointer;
-        -webkit-user-select: none;
-        border: 1px solid #444;
-        box-shadow: 0 0.2em 0 0.05em #222;
-        border-bottom-color: #555;
+.key--letter {
+    position: relative;
+    background: #dedddd;
+    text-align: center;
+    color: #000;
+    float: left;
+    border-radius: 0.3em;
+    margin: 0.2em;
+    padding: 0.2em;
+    width: 4.3em;
+    height: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+    -webkit-user-select: none;
+    border: 1px solid #444;
+    box-shadow: 0 0.2em 0 0.05em #222;
+    border-bottom-color: #555;
+}
+
+/* Manual Customized code */
+.calculator-main-box {
+    align-items: center;
+    padding: 100px 0;
+}
+
+
+
+@media (max-width:880px) {
+    #select_n {
+        padding-top: 20px;
+    }
+
+    #msg {
+        padding-top: 15px;
+    }
+}
+
+@media (max-width: 586px) {
+    .p-5 {
+        padding: 2rem !important;
+    }
+
+    .calculator-main-box {
+        align-items: center;
+        padding: 90px 0;
+    }
+
+    h6 {
+        font-size: 1.4em;
+        padding: 0.4em;
+    }
+
+    .p-5 {
+        padding: 1rem !important;
+    }
 }
