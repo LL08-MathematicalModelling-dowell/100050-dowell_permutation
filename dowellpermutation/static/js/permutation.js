@@ -51,9 +51,18 @@ msg_con.innerHTML = msg;
 // Instatiate keys
 let keys_row = document.getElementById('keys_row')
 
+var count = 0;
+
 //3
 const do_permutation = (variables) => {
     console.log("variables", variables)
+
+    //increase count by 1 and save to local storage
+    count += 1;
+    localStorage.setItem("count", count);
+    const count_data = localStorage.getItem("count");
+
+    if (count_data <= r_data) {
     $.ajax({
         url: 'https://100050.pythonanywhere.com/calculator/calculateperm/',
         type: 'POST',
@@ -71,6 +80,14 @@ const do_permutation = (variables) => {
             console.log(data)
         },
     })
+}
+else{
+    msg = `Not allowed, you can't select more than ${r_data} variables`
+    warningModal('Invalid Input', msg)
+
+}
+
+
 }
 
 //4
@@ -118,7 +135,7 @@ const appendData = (data) => {
 const saveData = (data) => {
     console.log("save data", data)
     $.ajax({
-        url: 'https://100050.pythonanywhere.com/calculator/permutations/save/',
+        url: 'https://100050.pythonanywhere.com/permutations/save/',
         type: 'POST',
         data: {
             char: data,
@@ -221,6 +238,7 @@ const createEl = (char) => {
     var el = document.createElement("div");
     el.classList.add("key--letter");
     selectedChars.add(char)
+
     if (selectedChars.size > n_data) {
         msg = `Not allowed, you can't select more than ${n_data} variables`
         warningModal('Invalid Input', msg)
