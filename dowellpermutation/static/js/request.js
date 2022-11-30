@@ -31,7 +31,7 @@ function getCookie(name) {
 const calculatePerm = (e) => {
     e.preventDefault()
     let result = 0
-
+    //https://100050.pythonanywhere.com  or http://127.0.0.1:8000
     fetch('https://100050.pythonanywhere.com/calculator/calcpermutations/', {
         method: 'POST',
         headers: {
