@@ -135,7 +135,7 @@ const appendData = (data) => {
 const saveData = (data) => {
     console.log("save data", data)
     $.ajax({
-        url: 'https://100050.pythonanywhere.com/permutations/save/',
+        url: 'https://100050.pythonanywhere.com/calculator/permutations/save/',
         type: 'POST',
         data: {
             char: data,
