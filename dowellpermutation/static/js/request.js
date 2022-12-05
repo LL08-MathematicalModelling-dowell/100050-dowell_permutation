@@ -31,7 +31,7 @@ function getCookie(name) {
 const calculatePerm = (e) => {
     e.preventDefault()
     let result = 0
-    //https://100050.pythonanywhere.com  or http://127.0.0.1:8000
+    //http://127.0.0.1:8000  or http://127.0.0.1:8000
     fetch('https://100050.pythonanywhere.com/calculator/calcpermutations/', {
         method: 'POST',
         headers: {
@@ -42,34 +42,34 @@ const calculatePerm = (e) => {
 
         body: JSON.stringify({
             payload: {
-                n:n_data.value,
-                r:r_data.value,
+                n: n_data.value,
+                r: r_data.value,
             }
         })
 
     })
-    .then(response => response.json())
-    .then(data => {
+        .then(response => response.json())
+        .then(data => {
 
-        // Show and hide buttons
-        submit_btn.style.display="none"
-        reset_btn.style.display="none"
-        show_permutation.style.display="block"
+            // Show and hide buttons
+            submit_btn.style.display = "none"
+            reset_btn.style.display = "none"
+            show_permutation.style.display = "block"
 
 
-        // populate the permutation result here
+            // populate the permutation result here
 
-        localStorage.setItem("result", data.data.result);
-        localStorage.setItem("n", data.data.n);
-        localStorage.setItem("r", data.data.r);
+            localStorage.setItem("result", data.data.result);
+            localStorage.setItem("n", data.data.n);
+            localStorage.setItem("r", data.data.r);
 
-        document.getElementById('permutation_result').innerHTML = `<p>Number of Permutations = <strong>${data.data.result}</strong></p>`
+            document.getElementById('permutation_result').innerHTML = `<p>Number of Permutations = <strong>${data.data.result}</strong></p>`
 
-    })
-    .catch((error) => {
-        // error handling here
-        // console.error('Error:', error);
-    })
+        })
+        .catch((error) => {
+            // error handling here
+            // console.error('Error:', error);
+        })
 }
 
 perm_form.addEventListener('submit', calculatePerm)

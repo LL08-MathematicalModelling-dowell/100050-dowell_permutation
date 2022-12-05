@@ -18,6 +18,8 @@ const selectedChars2 = new Set();
 const variable = new Set();
 const combination_set = new Set();
 
+let count = 0;
+let el_count = 0;
 
 
 function getCookie(name) {
@@ -51,7 +53,7 @@ msg_con.innerHTML = msg;
 // Instatiate keys
 let keys_row = document.getElementById('keys_row')
 
-var count = 0;
+
 
 //3
 const do_permutation = (variables) => {
@@ -63,29 +65,29 @@ const do_permutation = (variables) => {
     const count_data = localStorage.getItem("count");
 
     if (count_data <= r_data) {
-    $.ajax({
-        url: 'https://100050.pythonanywhere.com/calculator/calculateperm/',
-        type: 'POST',
-        data: {
-            char: variables,
-        },
-        headers:{
-            "X-CSRFToken": getCookie("csrftoken")
-        },
-        success: function(data) {
-            console.log(data)
-            appendData(data)
-        },
-        error: function(data) {
-            console.log(data)
-        },
-    })
-}
-else{
-    msg = `Not allowed, you can't select more than ${r_data} variables`
-    warningModal('Invalid Input', msg)
+        $.ajax({
+            url: 'https://100050.pythonanywhere.com/calculator/calculateperm/',
+            type: 'POST',
+            data: {
+                char: variables,
+            },
+            headers: {
+                "X-CSRFToken": getCookie("csrftoken")
+            },
+            success: function (data) {
+                console.log(data)
+                appendData(data)
+            },
+            error: function (data) {
+                console.log(data)
+            },
+        })
+    }
+    else {
+        msg = `Not allowed, you can't select more than ${r_data} variables`
+        warningModal('Invalid Input', msg)
 
-}
+    }
 
 
 }
@@ -102,7 +104,7 @@ const appendData = (data) => {
         el.classList.add("key--letter");
         el.innerHTML = `<div data-char="${data}">${data}</div>`
         show_d.appendChild(el)
-        el.onclick = function(el) {
+        el.onclick = function (el) {
             saveData(data)
         }
         //also display small message below this element
@@ -118,10 +120,10 @@ const appendData = (data) => {
             el.classList.add("key--letter");
             el.innerHTML = `<div data-char="${data[i]}">${data[i]}</div>`
             show_d.appendChild(el)
-            el.onclick = function(el) {
+            el.onclick = function (el) {
                 saveData(data[i])
             }
-              //also display small message below this element
+            //also display small message below this element
             const msg = `<span>Click on the any character from above to save it<span>`;
             const msg_con = document.getElementById('msg')
             msg_con.innerHTML = '';
@@ -140,14 +142,14 @@ const saveData = (data) => {
         data: {
             char: data,
         },
-        headers:{
+        headers: {
             "X-CSRFToken": getCookie("csrftoken")
         },
-        success: function(data) {
-            console.log("resp from save :",data);
+        success: function (data) {
+            console.log("resp from save :", data);
             appendData2(data);
         },
-        error: function(data) {
+        error: function (data) {
             console.log(data)
         },
     })
@@ -165,7 +167,7 @@ const appendData2 = (data) => {
         el.classList.add("key--letter");
         el.innerHTML = `<div data-char="${data}">${data}</div>`
         show_d.appendChild(el)
-        el.onclick = function(el) {
+        el.onclick = function (el) {
             saveData(data)
         }
         const msg = `<span>Now Select any variable from above<span>`;
@@ -182,7 +184,7 @@ const appendData2 = (data) => {
         // }
         el.innerHTML = `<div data-char="${data}">${data}</div>`
         show_d.appendChild(el)
-        el.onclick = function(el) {
+        el.onclick = function (el) {
             saveData(data[i])
         }
         const msg = `<span>Now Select any variable from above<span>`;
@@ -196,19 +198,19 @@ const appendData2 = (data) => {
 //whenever page refresh send a request to the server to clear session in the server
 
 const clearSession = () => {
-$.ajax({
-    url: 'https://100050.pythonanywhere.com/calculator/clear_session/',
-    type: 'POST',
-    headers:{
-        "X-CSRFToken": getCookie("csrftoken")
-    },
-    success: function(data) {
-        console.log(data)
-    },
-    error: function(data) {
-        console.log(data)
-    }
-})
+    $.ajax({
+        url: 'https://100050.pythonanywhere.com/calculator/clear_session/',
+        type: 'POST',
+        headers: {
+            "X-CSRFToken": getCookie("csrftoken")
+        },
+        success: function (data) {
+            console.log(data)
+        },
+        error: function (data) {
+            console.log(data)
+        }
+    })
 }
 
 //call the clear session function on page load
@@ -216,8 +218,8 @@ clearSession()
 
 // create a helper function
 const setAttributes = (el, attrs) => {
-    for(var key in attrs) {
-      el.setAttribute(key, attrs[key]);
+    for (var key in attrs) {
+        el.setAttribute(key, attrs[key]);
     }
 }
 
@@ -232,8 +234,15 @@ const setResult = (combination_set, res) => {
     return combination_set
 }
 
+
+
 //2
 const createEl = (char) => {
+
+    //increase count by 1 and save to local storage
+    el_count += 1;
+    localStorage.setItem("el_count", el_count);
+
     var card_body = document.getElementById('card_body')
     var el = document.createElement("div");
     el.classList.add("key--letter");
@@ -250,16 +259,23 @@ const createEl = (char) => {
 
     el.innerHTML = `<div data-char="${char}">${char}</div>`
     document.getElementById('char_row').appendChild(el)
-    el.onclick = function(el) {
-        do_permutation(char)
-        this.classList.add("disabledbutton")
+    el.onclick = function (el) {
+        if (localStorage.getItem("el_count") <= n_data - 1) {
+            warningModal('Invalid Input', `Please select atleast ${n_data} variables first`)
+            return
+        }
+        else {
+            do_permutation(char)
+            this.classList.add("disabledbutton")
+        }
+
     }
 }
 
 
 //1
 for (var x = 0; x < keys.length; x++) {
-    keys[x].onclick = function(){
+    keys[x].onclick = function () {
         let char = this.getAttribute('data-char')
         createEl(char)
     }
