@@ -32,7 +32,7 @@ DJANGO_APPS = [
     "rest_framework",
     "corsheaders",
     "api",
-    "api_dowell",
+    "Permutations_API",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PATRTY_APPS + LOCAL_APPS

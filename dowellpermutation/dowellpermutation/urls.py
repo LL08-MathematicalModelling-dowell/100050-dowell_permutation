@@ -20,5 +20,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("calculator/", include("calculator.urls")),
     path("api/", include("api.urls")),
-    path("api/v1/", include("api_dowell.urls")),
+    path('permutationapi/', include('Permutations_API.urls')),
 ]
