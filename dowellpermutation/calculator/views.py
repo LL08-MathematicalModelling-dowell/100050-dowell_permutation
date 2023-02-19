@@ -41,14 +41,59 @@ def calcpermutations(request):
     else:
         return HttpResponseBadRequest('Invalid request')
 
-
+@csrf_exempt
 def index(request):
-    return render(request, 'calculator/index.html')
+    session_id = request.GET.get("session_id", None)
+    code=request.GET.get('id',None)
+    if session_id:
+        url="https://100014.pythonanywhere.com/api/userinfo/"
+        response=requests.post(url,data={"session_id":session_id}) 
+        profile_detais= json.loads(response.text)
+        request.session["userinfo"]=profile_detais["userinfo"]
+        request.session["user_name"]=profile_detais["userinfo"]["username"]
+        request.session["portfolio_info"]=profile_detais["portfolio_info"]
+        request.session["role"]=profile_detais["portfolio_info"]["role"]
+        return render(request, 'calculator/index.html')
+    elif id == '100093':
+        url="https://100093.pythonanywhere.com/api/userinfo/"
+        response=requests.post(url,data={"session_id":session_id}) 
+        profile_detais= json.loads(response.text)
+        request.session["userinfo"]=profile_detais["userinfo"]
+        request.session["user_name"]=profile_detais["userinfo"]["username"]
+        request.session["portfolio_info"]=profile_detais["portfolio_info"]
+        request.session["role"]=profile_detais["portfolio_info"]["role"]
+        return render(request, 'calculator/index.html')
+    else:
+        return redirect(
+            "https://100014.pythonanywhere.com/en/linkbased?redirect_url=https://100050.pythonanywhere.com/calculator/"
+        )
 
 @csrf_exempt
 def permutataionselect(request):
-    return render(request, 'calculator/permutationselect.html')
-
+    session_id = request.GET.get("session_id", None)
+    code=request.GET.get('id',None)
+    if session_id:
+        url="https://100014.pythonanywhere.com/api/userinfo/"
+        response=requests.post(url,data={"session_id":session_id}) 
+        profile_detais= json.loads(response.text)
+        request.session["userinfo"]=profile_detais["userinfo"]
+        request.session["user_name"]=profile_detais["userinfo"]["username"]
+        request.session["portfolio_info"]=profile_detais["portfolio_info"]
+        request.session["role"]=profile_detais["portfolio_info"]["role"]
+        return render(request, 'calculator/permutationselect.html')
+    elif id == '100093':
+        url="https://100093.pythonanywhere.com/api/userinfo/"
+        response=requests.post(url,data={"session_id":session_id}) 
+        profile_detais= json.loads(response.text)
+        request.session["userinfo"]=profile_detais["userinfo"]
+        request.session["user_name"]=profile_detais["userinfo"]["username"]
+        request.session["portfolio_info"]=profile_detais["portfolio_info"]
+        request.session["role"]=profile_detais["portfolio_info"]["role"]
+        return render(request, 'calculator/permutationselect.html')
+    else:
+        return redirect(
+            "https://100014.pythonanywhere.com/en/linkbased?redirect_url=https://100050.pythonanywhere.com/calculator/permutations/select/"
+        )
 
 def permuationsFunction(permutationsVariables, nextVariable):
     permutationsList = []
