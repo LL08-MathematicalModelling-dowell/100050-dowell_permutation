@@ -4,6 +4,7 @@ from .views import *
 
 urlpatterns = [
     path('', index, name="index"),
+    path('home/', home, name="home"),
 
     path('permutations/select/', permutataionselect, name="permutataionselect"),
     path('calcpermutations/', calcpermutations, name="calcpermutations"),
