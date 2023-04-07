@@ -43,12 +43,12 @@ def dowellConnection(data):
     field = data['field']
     update_field = data['update_field']
     payload = json.dumps({
-        "cluster": "Documents",
-        "database": "Documentation",
-        "collection": "permutation",
-        "document": "permutation",
-        "team_member_ID": "100084007",
-        "function_ID": "ABCDE",
+    "cluster": "dowellfunctions",
+    "database": "dowellfunctions",
+    "collection": "permutations",
+    "document": "permutations",
+    "team_member_ID": "1195001",
+    "function_ID": "ABCDE",
         "command": command,
         "field": field,
         "update_field": update_field,
