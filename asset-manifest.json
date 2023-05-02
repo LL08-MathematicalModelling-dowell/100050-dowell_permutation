@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.f99ae1ca.css",
-    "main.js": "/static/js/main.954b2ce6.js",
-    "static/js/787.762cfbc4.chunk.js": "/static/js/787.762cfbc4.chunk.js",
-    "index.html": "/index.html",
-    "main.f99ae1ca.css.map": "/static/css/main.f99ae1ca.css.map",
-    "main.954b2ce6.js.map": "/static/js/main.954b2ce6.js.map",
-    "787.762cfbc4.chunk.js.map": "/static/js/787.762cfbc4.chunk.js.map"
+    "main.css": "/100050-dowell_permutation/static/css/main.e6218b03.css",
+    "main.js": "/100050-dowell_permutation/static/js/main.09804955.js",
+    "static/js/787.762cfbc4.chunk.js": "/100050-dowell_permutation/static/js/787.762cfbc4.chunk.js",
+    "index.html": "/100050-dowell_permutation/index.html",
+    "main.e6218b03.css.map": "/100050-dowell_permutation/static/css/main.e6218b03.css.map",
+    "main.09804955.js.map": "/100050-dowell_permutation/static/js/main.09804955.js.map",
+    "787.762cfbc4.chunk.js.map": "/100050-dowell_permutation/static/js/787.762cfbc4.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f99ae1ca.css",
-    "static/js/main.954b2ce6.js"
+    "static/css/main.e6218b03.css",
+    "static/js/main.09804955.js"
   ]
 }
