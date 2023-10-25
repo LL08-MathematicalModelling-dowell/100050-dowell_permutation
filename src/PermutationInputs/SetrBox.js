@@ -11,6 +11,9 @@ function SetrBox({rData}) {
   const dispatch = useDispatch()
 
   const insertedId = useSelector((state) => state.userId.inserted_id)
+  const email = useSelector((state) => state.userId.email)
+  const r = useSelector((state) => state.userId.r)
+  const rCount = useSelector((state) => state.userId.rcount)
   const strArray = rData.split(",")
   let rArray = []
 
@@ -21,9 +24,26 @@ function SetrBox({rData}) {
   }
 
   addArray()
-
+  console.log("This is rcount",rCount)
+  console.log("This is r",r)
   const savePermutation = async () =>{
     dispatch(assignIsClicked(false))
+    if(rCount === Number(r)) {
+    try{
+      const resp = await axios.post(
+        'https://100050.pythonanywhere.com/permutationapi/api/', {
+          "inserted_id":insertedId,
+          "selectedPermutation":rArray,
+          "email": email,
+          "command":"savePermutation"
+  })
+  console.log(resp.data.message)
+  let pvar = resp.data.message
+  console.log(pvar.substring(pvar.indexOf("["), pvar.indexOf("]")+1))
+  }catch(err){
+    console.log(err.response)
+  }
+  } else {
     try{
       const resp = await axios.post(
         'https://100050.pythonanywhere.com/permutationapi/api/', {
@@ -36,6 +56,7 @@ function SetrBox({rData}) {
   console.log(pvar.substring(pvar.indexOf("["), pvar.indexOf("]")+1))
   }catch(err){
     console.log(err.response)
+  }
   }
   }
 

@@ -17,6 +17,7 @@ function Calculator() {
   const [keyboardChars] = React.useState(['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,'`','~','!','@','#','$','%','^','&','*','(',')','<','>','?'])
 
     const dispatch = useDispatch()
+    const email = useSelector((state) => state.userId.email)
     const n = useSelector((state) => state.userId.n)
     const r = useSelector((state) => state.userId.r)
     const ch = useSelector((state) => state.userId.kchar)
@@ -54,6 +55,7 @@ function Calculator() {
 
     const addRData = () =>{
       let str = ""
+      if(rSet !== undefined){
       if(rSet.length === 1){
         if(RData.includes(rSet) === true || rSet === ''){
 
@@ -72,6 +74,7 @@ function Calculator() {
           }
         }
       }
+      }
     }
 
     checkArray()
@@ -80,6 +83,7 @@ function Calculator() {
   return (
     <div className='calculator'>
       <div className='permutations'>
+        <p>User email = <span>{email}</span></p>
         <p>Total amount in a set 'n' = <span>{n}</span></p>
         <p>Amount in each subset 'r' = <span>{r}</span></p>
         <p>Total number of permutations are = <span>{totalPermutation}</span></p>

@@ -12,7 +12,8 @@ const initialState = {
   isClicked: false,
   inserted_id:'',
   arrayLen: 0,
-  active: true
+  active: true,
+  email: ""
 }
 
 export const counterSlice = createSlice({
@@ -21,6 +22,9 @@ export const counterSlice = createSlice({
   reducers: {
     assignSetN: (state, action) => {
       state.n = action.payload
+    },
+    assignEmail: (state, action) => {
+      state.email = action.payload
     },
     assignKchar: (state, action) => {
       state.kchar = action.payload
@@ -58,6 +62,9 @@ export const counterSlice = createSlice({
     resetN: (state) => {
       state.n = 0
     },
+    resetEmail: (state) => {
+      state.email = ""
+    },
     resetR: (state) => {
       state.r = 0
     },
@@ -94,5 +101,5 @@ export const counterSlice = createSlice({
   }
 })
 
-export const { assignSetN, assignSetR, assignPermutationResult, assignNCount, assignKchar, assignrSet, assignRCount, assignIsClicked, assignInsertedId, assignArrayLen, assignCount, assignActive, resetKchar, resetN, resetR, resetPermutationResult, resetNCount, resetrSet, resetRCount, resetIsClicked, resetInsertedId, resetCount, resetArrayLen, resetActive } = counterSlice.actions
+export const { assignSetN, assignSetR, assignPermutationResult, assignNCount, assignKchar, assignrSet, assignRCount, assignIsClicked, assignInsertedId, assignArrayLen, assignCount, assignActive, assignEmail, resetKchar, resetN, resetR, resetPermutationResult, resetNCount, resetrSet, resetRCount, resetIsClicked, resetInsertedId, resetCount, resetArrayLen, resetActive, resetEmail } = counterSlice.actions
 export default counterSlice.reducer
