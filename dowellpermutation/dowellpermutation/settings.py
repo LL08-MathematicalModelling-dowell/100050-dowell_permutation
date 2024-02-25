@@ -33,6 +33,7 @@ DJANGO_APPS = [
     "corsheaders",
     "api",
     "Permutations_API",
+    "shuffle"
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PATRTY_APPS + LOCAL_APPS

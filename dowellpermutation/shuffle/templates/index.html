@@ -1,0 +1,141 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shuffle API</title>
+    <style>
+        body {
+            background-color: #ffffff
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .title {
+            text-align: center;
+            padding: 1rem;
+            background-color: #108001;
+            color: #ffffff;
+            font-size: 2rem;
+            font-weight: bold;
+            height: 5rem;
+        }
+
+        .container {
+            display: flex;
+            height: calc(100vh - 6rem);
+
+        }
+
+        .column {
+            flex: 1;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-column {
+            background-color: #ecf0f1;
+            padding: 1rem;
+        }
+
+        .output-column {
+            background-color: #ffffff;
+            padding: 1rem;
+            overflow-y: auto;
+            border-right: 2px solid #108001; /* Green right border */
+            border-left: 2px solid #108001; /* Green left border */
+        }
+        
+
+        .custom-textarea {
+            width: 100%;
+            height: 100%;
+            resize: none;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .custom-button {
+            width: 100%;
+            height: 3rem;
+            background-color: #108001;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        .inside-input-column {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .output-item {
+            padding: 0.2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="title">Shuffle API</div>
+
+    <div class="container">
+        <div class="column input-column">
+            <div class="inside-input-column">
+                <textarea
+                    id="inputTextArea"
+                    class="custom-textarea"
+                    name="input"
+                    placeholder="Input your data"
+                    required
+                ></textarea>
+                <button class="custom-button" onClick="shuffle()">Shuffle</button>
+            </div>
+        </div>
+
+        <div id="outputColumn" class="column output-column">
+            <p class="text-gray-500">Output</p>
+            {% for item in output %}
+                <div class="output-item">{{ item }}</div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        function shuffle() {
+            // Get input data, split by commas, and remove white spaces
+            const inputData = document.getElementById('inputTextArea').value;
+            const dataList = inputData.split(',').map(item => item.trim()).filter(item => item !== '');
+
+            // Make a POST request to your API endpoint
+            fetch('/shuffle/api/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ series: dataList }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Update the output column with the response
+                console.log(data);
+                const outputColumn = document.getElementById('outputColumn');
+                outputColumn.innerHTML = '<p class="text-gray-500">Output</p>';
+                data.result.forEach(item => {
+                    const outputItem = document.createElement('div');
+                    outputItem.className = 'output-item';
+                    outputItem.textContent = item;
+                    outputColumn.appendChild(outputItem);
+                });
+
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+
+
+
+</body>
+</html>
