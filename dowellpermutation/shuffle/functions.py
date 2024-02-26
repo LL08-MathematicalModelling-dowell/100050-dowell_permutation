@@ -1,23 +1,12 @@
 from typing import List
 import random
-import requests
+
+from .shuffle_v4 import statistical_shuffle
 
 
 def big_data_api_shuffle(deck_size, test_num, error):
-    url = "https://100072.pythonanywhere.com/shuffle_internal/"
-    
-    payload = {
-        "deck_size": deck_size,
-        "test_num": test_num,
-        "error": error,
-        "optimal_only": True
-    }
-    
-    # send the request
-    response = requests.post(url, json=payload)
-    
-    # return the optimal series
-    return response.json()['optimal_series']
+    _, _, _, optimal_series = statistical_shuffle(deck_size, test_num, error)
+    return optimal_series
     
 
 def api_suffle(series: List[any]) -> List[any]:
