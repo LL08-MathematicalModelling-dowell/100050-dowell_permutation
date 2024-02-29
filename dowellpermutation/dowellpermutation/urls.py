@@ -8,5 +8,5 @@ urlpatterns = [
     path("calculator/", include("calculator.urls")),
     path("api/", include("api.urls")),
     path('permutationapi/', include('Permutations_API.urls')),
-    path('shuffle/', include('shuffle.urls')),
+    path('permutations/', include('shuffle.urls')),
 ]

@@ -79,7 +79,7 @@
 </head>
 <body>
 
-    <div class="title">Shuffle API</div>
+    <div class="title">Permutations</div>
 
     <div class="container">
         <div class="column input-column">
@@ -110,7 +110,7 @@
             const dataList = inputData.split(',').map(item => item.trim()).filter(item => item !== '');
 
             // Make a POST request to your API endpoint
-            fetch('/shuffle/api/', {
+            fetch('/permutations/api/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
