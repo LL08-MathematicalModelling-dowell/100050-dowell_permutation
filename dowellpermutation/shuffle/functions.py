@@ -32,20 +32,26 @@ def insert_item(series: List[any], item: any) -> None:
     
     
 
-def final_shuffle(series: List[any]) -> List[any]:
+def final_shuffle(series: List[any], n, r) -> List[any]:    
     # Shuffle series using the right shuffle function
     shuffled_series = api_suffle(series)
     
+    # select the first n values as your set
+    items = shuffled_series[:n]
+    
+    # shuffle the set
+    shuffled_items = api_suffle(items)
+    
     # Insert the first data item to the result
-    res = [shuffled_series[0]]
+    res = [shuffled_items[0]]
     
     # Iterate through each data one by one and insert using the rule described above
     # Skip the first value since it is trivialy inserted in the result above
-    for idx in range(1, len(shuffled_series)):
+    for idx in range(1, r):
         # Get the item at that index
-        item = shuffled_series[idx]
+        item = shuffled_items[idx]
         
         # call the insert function for each data point that implements the above logic
         insert_item(res, item)
     
-    return res
+    return items, res
