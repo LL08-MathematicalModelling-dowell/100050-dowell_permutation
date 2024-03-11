@@ -20,7 +20,7 @@
             color: #ffffff;
             font-size: 2rem;
             font-weight: bold;
-            height: 5rem;
+            height: 4.5rem;
         }
 
         .container {
@@ -66,6 +66,12 @@
             cursor: pointer;
         }
 
+        .custom-input {
+            width: 100%;
+            height: 3rem;
+            margin-bottom: 1rem;
+        }
+
         .inside-input-column {
             display: flex;
             flex-direction: column;
@@ -84,22 +90,18 @@
     <div class="container">
         <div class="column input-column">
             <div class="inside-input-column">
-                <textarea
-                    id="inputTextArea"
-                    class="custom-textarea"
-                    name="input"
-                    placeholder="Input your data"
-                    required
-                ></textarea>
-                <button class="custom-button" onClick="shuffle()">Shuffle</button>
+                <textarea id="inputTextArea" class="custom-textarea" name="input" placeholder="Input your data"
+                    required></textarea>
+                <!-- Add input boxes for integers n and r -->
+                <input type="number" id="inputN" class="custom-input" placeholder="  Enter n" required>
+                <input type="number" id="inputR" class="custom-input" placeholder="  Enter r" required>
+                <button class="custom-button" onClick="shuffle()">Permute</button>
             </div>
         </div>
 
         <div id="outputColumn" class="column output-column">
             <p class="text-gray-500">Output</p>
-            {% for item in output %}
-                <div class="output-item">{{ item }}</div>
-            {% endfor %}
+            <!-- Output items will be appended here dynamically -->
         </div>
     </div>
 
@@ -108,34 +110,72 @@
             // Get input data, split by commas, and remove white spaces
             const inputData = document.getElementById('inputTextArea').value;
             const dataList = inputData.split(',').map(item => item.trim()).filter(item => item !== '');
+    
+            // Get values of integers n and r and parse them to integers
+            const nValue = parseInt(document.getElementById('inputN').value);
+            const rValue = parseInt(document.getElementById('inputR').value);
 
+            // Validate n and r
+            if (isNaN(nValue) || isNaN(rValue) || nValue <= 0 || rValue <= 0 || rValue > nValue || nValue > dataList.length) {
+                alert('Invalid values for n and/or r. Please make sure they are greater than zero, r is less than or equal to n, and n is less than or equal to the length of the series.');
+                return;
+            }
+    
             // Make a POST request to your API endpoint
             fetch('/permutations/api/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ series: dataList }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Update the output column with the response
-                console.log(data);
-                const outputColumn = document.getElementById('outputColumn');
-                outputColumn.innerHTML = '<p class="text-gray-500">Output</p>';
-                data.result.forEach(item => {
-                    const outputItem = document.createElement('div');
-                    outputItem.className = 'output-item';
-                    outputItem.textContent = item;
-                    outputColumn.appendChild(outputItem);
-                });
-
-            })
-            .catch(error => console.error('Error:', error));
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        M: dataList,
+                        n: nValue,
+                        r: rValue
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Update the output column with the response
+                    console.log(data);
+                    const outputColumn = document.getElementById('outputColumn');
+                    outputColumn.innerHTML = ''; // Clear existing content
+    
+                    // Display selected_items with label outside and on top
+                    const selectedItemsLabel = document.createElement('p');
+                    selectedItemsLabel.className = 'output-label';
+                    selectedItemsLabel.textContent = 'Selected Items';
+                    outputColumn.appendChild(selectedItemsLabel);
+    
+                    const selectedItemsContainer = document.createElement('div');
+                    selectedItemsContainer.className = 'output-container';
+                    data.selected_items.forEach(item => {
+                        const outputItem = document.createElement('div');
+                        outputItem.className = 'output-item';
+                        outputItem.textContent = item;
+                        selectedItemsContainer.appendChild(outputItem);
+                    });
+                    outputColumn.appendChild(selectedItemsContainer);
+    
+                    // Display permuted_items with label outside and on top
+                    const permutedItemsLabel = document.createElement('p');
+                    permutedItemsLabel.className = 'output-label';
+                    permutedItemsLabel.textContent = 'Permuted Items';
+                    outputColumn.appendChild(permutedItemsLabel);
+    
+                    const permutedItemsContainer = document.createElement('div');
+                    permutedItemsContainer.className = 'output-container';
+                    data.permuted_items.forEach(item => {
+                        const outputItem = document.createElement('div');
+                        outputItem.className = 'output-item';
+                        outputItem.textContent = item;
+                        permutedItemsContainer.appendChild(outputItem);
+                    });
+                    outputColumn.appendChild(permutedItemsContainer);
+    
+                })
+                .catch(error => console.error('Error:', error));
         }
     </script>
-
-
-
+    
 </body>
 </html>
